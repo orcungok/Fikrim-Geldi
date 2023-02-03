@@ -1,0 +1,33 @@
+{
+  "name": "fg",
+  "version": "1.5.0",
+  "description": "İnci Holding kurum içi girişimcilik projesidir",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --ext * app.js",
+    "sass:compile": "sass --watch --no-source-map public/scss/takim_arkadasi_ilan_panosu.scss public/css/takim_arkadasi_ilan_panosu.css"
+  },
+  "keywords": [],
+  "author": "Orçun Gök",
+  "license": "ISC",
+  "dependencies": {
+    "aos": "^2.3.4",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^5.3.0-alpha1",
+    "connect-livereload": "^0.6.1",
+    "cookie-parser": "^1.4.6",
+    "deep-email-validator": "^0.1.21",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "livereload": "^0.9.3",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "rand-token": "^1.0.1",
+    "sass": "^1.57.1"
+  }
+}

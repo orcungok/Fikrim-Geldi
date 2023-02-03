@@ -1,0 +1,208 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+$font-family-sans-serif: "Montserrat", sans-serif;
+
+body {
+  font-family: $font-family-sans-serif;
+  background-color: rgba(255, 255, 255, 0.764);
+  line-height: 1.8;
+  color: darken(#ccc, 25%);
+}
+
+.tailan-ver-wrapper {
+
+  margin-top: 200px;
+
+
+}
+
+.text-black {
+  color: #000;
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: black;
+}
+
+.form-control {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+
+  &:active,
+  &:focus {
+    outline: none;
+    border: 1px solid #f99a1d;
+    box-shadow: none;
+
+
+  }
+}
+
+.col-form-label {
+  color: #000;
+}
+
+.btn,
+.form-control,
+.custom-select {
+  height: 50px;
+}
+
+.custom-select {
+  &:active,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #000;
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 4px !important;
+
+  &.btn-primary {
+    background: $black;
+    color: $white;
+    padding: 15px 20px;
+  }
+
+  &:hover {
+    color: $white;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+textarea.form-control {
+  min-height: calc(7em + 7rem + calc(var(--bs-border-width) * 2));
+}
+
+// ======================================== BLB BUTTON EFFECT ON HOVER =================================================
+
+$cyan: #f99a1d;
+$dark: #ffffff;
+$borderW: 2px;
+
+.buttons {
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 30px;
+}
+
+.blob-btn {
+  $numOfBlobs: 4;
+  z-index: 1;
+  position: relative;
+  padding: 20px 46px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: $cyan;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: color 0.5s;
+  cursor: pointer;
+  border-radius: 30px;
+
+  &:before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: $borderW solid $cyan;
+    border-radius: 30px;
+  }
+
+  &:after {
+    content: "";
+    z-index: -2;
+    position: absolute;
+    left: $borderW * 1.5;
+    top: $borderW * 1.5;
+    width: 100%;
+    height: 100%;
+
+    transition: all 0.3s 0.2s;
+    border-radius: 30px;
+  }
+
+  &:hover {
+    color: $dark;
+    border-radius: 30px;
+
+    &:after {
+      transition: all 0.3s;
+      left: 0;
+      top: 0;
+      border-radius: 30px;
+    }
+  }
+
+  &__inner {
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    background: #ffffff;
+  }
+
+  // additional container created, because in FF blobs are breaking overflow:hidden of element with svg gooey filter
+  &__blobs {
+    position: relative;
+    display: block;
+    height: 100%;
+    filter: url("#goo");
+  }
+
+  &__blob {
+    position: absolute;
+    top: $borderW;
+    width: calc(100% / $numOfBlobs);
+    height: 100%;
+    background: $cyan;
+    border-radius: 100%;
+    transform: translate3d(0, 150%, 0) scale(1.7);
+    transition: transform 0.45s;
+
+    @supports (filter: url("#goo")) {
+      transform: translate3d(0, 150%, 0) scale(1.4);
+    }
+
+    @for $i from 1 through $numOfBlobs {
+      &:nth-child(#{$i}) {
+        left: ($i - 1) * calc(100% / $numOfBlobs);
+        transition-delay: ($i - 1) * 0.08s;
+      }
+    }
+
+    .blob-btn:hover & {
+      transform: translateZ(0) scale(1.7);
+
+      @supports (filter: url("#goo")) {
+        transform: translateZ(0) scale(1.4);
+      }
+    }
+  }
+}
+
+// ======================================== BLB BUTTON EFFECT ON HOVER =================================================

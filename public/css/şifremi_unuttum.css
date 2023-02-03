@@ -1,0 +1,145 @@
+body {
+
+	padding: 0;
+	margin: 0;
+	background: linear-gradient(-45deg, #F29D35, #F29D35, #F20530, #F20530);
+	background-size: 400% 400%;
+	animation: gradient 4s ease infinite;
+	height: 100vh;
+
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+.form-control:focus {
+
+	box-shadow: 0 0 0 0.25rem rgb(247 157 53 / 100%);
+	;
+	border: none;
+
+}
+
+.btn {
+
+	background-color: #282828;
+	color: #F8F8F8;
+
+}
+
+.btn:hover {
+
+	background-color: #f29d35;
+	color: #282828;
+
+}
+
+
+a,
+a:hover {
+
+	text-decoration: none;
+	color: #f29d35;
+	font-size: 16px;
+	font-weight: bold;
+
+}
+
+
+@keyframes slide-in-anim {
+	20% {
+		opacity: 0;
+	}
+
+	60% {
+		transform: translateX(-45%);
+	}
+
+	75% {
+		transform: translateX(-52%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(-50%);
+	}
+}
+
+h1 {
+	font-family: 'arial black';
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	margin-left: 50%;
+	transform: translateX(-200%);
+	opacity: 0;
+	animation: slide-in-anim 1.5s ease-out forwards;
+
+}
+
+.good {
+
+
+
+	color: #171717;
+	animation-name: glow;
+	animation-duration: .2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+
+}
+
+.error {
+
+	padding: 0;
+	margin: 0;
+	margin-left: 50%;
+	transform: translateX(-200%);
+	opacity: 0;
+	animation: slide-in 1s ease-out forwards;
+	color: #EF011E;
+
+}
+
+
+@keyframes glow {
+	from {
+		text-shadow: 0px 0px 5px #fff, 0px 0px 5px #F29D35;
+	}
+
+	to {
+		text-shadow: 0px 0px 20px #fff, 0px 0px 20px #F29D35;
+	}
+}
+
+
+@keyframes slide-in {
+	20% {
+		opacity: 0;
+	}
+
+	60% {
+		transform: translateX(-45%);
+	}
+
+	75% {
+		transform: translateX(-52%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(-50%);
+	}
+}

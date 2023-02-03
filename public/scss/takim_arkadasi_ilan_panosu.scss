@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+$main-orange: #f99a1d;
+$main-red : #F43D38;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: white;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-family: "MontSerrat", sans-serif;
+}
+
+.wrapper {
+  margin: 10vh;
+}
+
+//post card styles
+
+.swiper {
+  width: 600px;
+  height: 300px; 
+}
+
+
+
+.card {
+  border: none;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 450px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    min-height: 350px;
+  }
+
+  @media (max-width: 420px) {
+    min-height: 300px;
+  }
+
+  &.card-has-bg {
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    background-size: 120%;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: inherit;
+      -webkit-filter: grayscale(1);
+      -moz-filter: grayscale(100%);
+      -ms-filter: grayscale(100%);
+      -o-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+
+    &:hover {
+      transform: scale(0.98);
+      box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.3);
+      background-size: 130%;
+      transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
+      .card-img-overlay {
+        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+        background: $main-orange;
+        background: linear-gradient(
+          0deg,
+          rgba(4, 69, 114, 0.5) 0%,
+          $main-red 100%
+        );
+      }
+    }
+  }
+
+  .card-footer {
+    background: none;
+    border-top: none;
+
+    .media {
+      img {
+        border: solid 3px rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .card-meta {
+    color: #26bd75;
+  }
+
+  .card-body {
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  &:hover {
+    .card-body {
+      margin-top: 30px;
+      transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    cursor: pointer;
+    transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .card-img-overlay {
+    transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    background: rgb(35, 79, 109);
+    background: linear-gradient(
+      0deg,
+      rgba(249, 154, 29, 0.379) 0%,
+      rgb(0, 0, 0) 100%
+    );
+  }
+}
+
+@media (max-width: 767px) {
+}
+
+.annT_owner {
+  text-decoration: none;
+  color: rgb(249, 154, 29);
+  font-weight: bold;
+  &:hover {
+    color: #f43d38;
+    font-weight: bolder;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.tmmt-super-wrapper {
+  margin-top: 200px;
+}
+.tmmt-header {
+  color: #f99a1d;
+}
+
+
+.tmmt-hero-img {
+  height: 60vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.tüm-ilanlar {
+  color: black;
+
+  &:hover {
+    color: #F43D38;
+  }
+}
+
+
+.ilan_projesi {
+  color: white;
+
+  &:hover {
+    color: black;
+    font-weight: bolder;
+  }
+}
+
+.search-icon {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #f99a1d;
+}
+
+#autocomplete_search:focus {
+  
+  border: 1px solid $main-orange;
+
+
+
+}
+
+.form-select:focus,
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid $main-orange;
+}
+
+.pagination-link {
+  color: #f99a1d;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  border-radius: 10px;
+  border: none;
+  margin: 20px;
+}
+
+.pagination-link:active {
+  box-shadow: none;
+}
+
+.pagination-link:hover {
+  border: none;
+  background-color: #f43d38;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.prev-pag,
+.next-pag {
+  width: 200px;
+  background: #f99a1d;
+  color: white;
+}
+
+
+.modal-btn {
+
+  background-color: $main-orange;
+  color: white;
+
+  &:hover {
+
+    color: white;
+    background-color: $main-red;
+
+
+  }
+
+
+}
+
+.btn-close{
+
+  background-color : $main-orange ; 
+ 
+
+}
+
+.btn-close:active,.btn-close:focus{
+  box-shadow: none;
+}
+.btn-close:hover{
+  background-color: $main-red;
+}
+
+
+
+
+
+
+@keyframes tilt-shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(5deg);
+  }
+
+  50% {
+    transform: rotate(0eg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
