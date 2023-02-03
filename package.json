@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon --ext * app.js",
+    "build": "npm run build",
     "sass:compile": "sass --watch --no-source-map public/scss/takim_arkadasi_ilan_panosu.scss public/css/takim_arkadasi_ilan_panosu.css"
   },
   "keywords": [],
