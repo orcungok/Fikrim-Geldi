@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/custom-sheets/navbar.css">
+  <link rel="stylesheet" href="../css/takim_arkadasi_ilani_ver.css">
+  <link rel="stylesheet" href="/css/custom-sheets/scrollbar.css">
+
+
+  <title>Takım Arkadaşı İlanı Ver</title>
+
+</head>
+
+
+
+<body>
+
+  <header>
+
+    {{>navbar}}
+
+
+  </header>
+
+
+  <div data-aos="zoom-in" data-aos-duration="1000"
+    class="content d-flex justify-content-center align-items-center tailan-ver-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 p-3">
+
+          <h3 class="heading mb-4">Takım arkadaşı ilanını şimdi paylaş!</h3>
+          <p>Proje ekibinizde aradığınız takım arkadaşının özelliklerini belirten bir ilan paylaşın</p>
+
+          <p><img src="/images/banners/tmmt-ilan-hero.jpg" alt="Image" class="img-fluid"></p>
+
+
+        </div>
+        <div class="col-md-6 p-3">
+          <form class="mb-5" method="post" action="/takim-arkadasi-ilani-ver" id="taİlanForm" name="taİlanForm">
+            <div class="row">
+              <div class="col-md-12 gy-3">
+                <input type="text" class="form-control" name="ann_title" id="ann_title" placeholder="İlan Başlığı">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 gy-3">
+                <input type="text" class="form-control" name="ann_project_name" id="ann_project_name"
+                  placeholder="Takım arkadaşı aradığınız projenizin ismi">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 gy-3">
+                <textarea class="form-control" name="ann_explanation" id="ann_explanation"
+                  placeholder="İlan mesajınız"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 gy-2">
+
+
+
+                <div class="buttons">
+                  <button type="submit" class="blob-btn">
+                    İLANI GÖNDER
+                    <span class="blob-btn__inner">
+                      <span class="blob-btn__blobs">
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script src="../js/ta-ilan-ver.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+
+</body>
+
+</html>

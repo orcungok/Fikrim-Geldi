@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil</title>
+
+  <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" type="text/css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/css/custom-sheets/navbar.css">
+  <link rel="stylesheet" href="../css/profil.css" type="text/css">
+  <link rel="stylesheet" href="/css/custom-sheets/scrollbar.css">
+
+
+</head>
+
+<body>
+
+  <header>
+
+    {{>navbar}}
+
+  </header>
+
+
+  {{#each unique_user as |user|}}
+  <section data-aos="fade-up" id="kullanıcı-şahsi-bilgileri">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+          <div class="card border-0 shadow">
+            <img src="../images/avatar_images/profile.png" alt="...">
+            <div class="card-body p-1-9 p-xl-5">
+              <div class="mb-4">
+                <h3 class="h4 mb-0">{{user.NAME}} {{user.SURNAME}}</h3>
+                <span class="text-primary">{{user.TITLE}}</span>
+              </div>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3"><a href="#!"><i class="far fa-envelope display-25 me-3 text-secondary"></i>
+                    {{user.EMAIL}}</a></li>
+                <li class="mb-3"><a href="#!"><i class="fas fa-mobile-alt display-25 me-3 text-secondary"></i>+012 (345)
+                    6789</a></li>
+                <li><a href="#!"><i class="fas fa-map-marker-alt display-25 me-3 text-secondary"></i>
+                    {{user.COMPANY}}</a></li>
+              </ul>
+              <ul class="social-icon-style2 ps-0">
+                <li><a href="#!" class="rounded-3"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#!" class="rounded-3"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#!" class="rounded-3"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="#!" class="rounded-3"><i class="fab fa-linkedin-in"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="ps-lg-1-6 ps-xl-5">
+            <div class="mb-5 wow fadeIn">
+              <div class="text-start mb-1-6 wow fadeIn">
+                <h2 class="h1 mb-0 text-primary">#Hakkında</h2>
+              </div>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia quis est minima. Id quae vero, non
+                unde facilis laboriosam eos facere tempore magni beatae maiores numquam ipsam harum aspernatur qui.lorem
+              </p>
+              <p class="mb-0">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat magni voluptas
+                perspiciatis quidem repellendus, cum, tenetur in similique optio soluta deserunt cumque ab, ipsam alias
+                ipsa quasi atque corrupti? Deserunt.</p>
+            </div>
+            <div class="mb-5 wow fadeIn">
+              <div class="text-start mb-1-6 wow fadeIn">
+                <h2 class="mb-0 text-primary">#Eğitim Bilgileri</h2>
+              </div>
+              <div class="row mt-n4">
+                <div class="col-sm-6 col-xl-4 mt-4">
+                  <div class="card text-center border-0 rounded-3">
+                    <div class="card-body">
+                      <i class=" fa-solid fa-school rounded-3 mb-4"></i>
+                      <h3 class="h5 mb-3">Eğitim</h3>
+                      <p class="mb-0">Manisa Celal Bayar Üniversitesi Bilgisayar Mühendisliği</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xl-4 mt-4">
+                  <div class="card text-center border-0 rounded-3">
+                    <div class="card-body">
+                      <i class="fa-solid fa-business-time rounded-3 mb-4"></i>
+                      <h3 class="h5 mb-3">Kariyer</h3>
+                      <p class="mb-0">İnci Holding'te Genç İnci olarak çalışıyor</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xl-4 mt-4">
+                  <div class="card text-center border-0 rounded-3">
+                    <div class="card-body">
+                      <i class="fa-solid fa-gear rounded-3 mb-4"></i>
+                      <h3 class="h5 mb-3">Tecrübe</h3>
+                      <p class="mb-0">Askerliğini yapmış, en az 5 yıl tecrübeli eleman aranıyor</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wow fadeIn">
+              <div class="text-start mb-1-6 wow fadeIn">
+                <h2 class="mb-0 text-primary">#Yetenekler</h2>
+              </div>
+              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum vitae voluptatem
+                molestiae consequuntur aliquid sapiente sequi deserunt rerum voluptatum enim cumque et rem atque non,
+                esse officia expedita dolor qui? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit id
+                exercitationem minima voluptate earum architecto dolore illum. Necessitatibus quae dolorum repudiandae
+                repellat in voluptas. Aperiam excepturi consequuntur nostrum ratione odit.</p>
+              <div class="progress-style1">
+                <div class="progress-text">
+                  <div class="row">
+                    <div class="col-6 fw-bold">Sürdürülebilirlik</div>
+                    <div class="col-6 text-end">70%</div>
+                  </div>
+                </div>
+                <div class="custom-progress progress rounded-3 mb-4">
+                  <div class="animated custom-bar progress-bar slideInLeft" style="width:70%" aria-valuemax="100"
+                    aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
+                </div>
+                <div class="progress-text">
+                  <div class="row">
+                    <div class="col-6 fw-bold">Etik İlkeler</div>
+                    <div class="col-6 text-end">90%</div>
+                  </div>
+                </div>
+                <div class="custom-progress progress rounded-3 mb-4">
+                  <div class="animated custom-bar progress-bar slideInLeft" style="width:90%" aria-valuemax="100"
+                    aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+                </div>
+                <div class="progress-text">
+                  <div class="row">
+                    <div class="col-6 fw-bold">Finans</div>
+                    <div class="col-6 text-end">80%</div>
+                  </div>
+                </div>
+                <div class="custom-progress progress rounded-3">
+                  <div class="animated custom-bar progress-bar slideInLeft" style="width:80%" aria-valuemax="100"
+                    aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/each}}
+
+
+
+
+
+  <section id="kullanıcı-modül-bilgileri">
+
+    <div class="profile-modules-main-wrapper overflow-x-hidden">
+
+      <div data-aos="slide-left" class="project-sticky-super">
+
+        <div class="project-sticky-wrapper">
+          <h4 class="m-4 text-center text-white bg-dark p-2 rounded-2">Proje Kütüphanesine Eklenmiş Projeler</h4>
+          <div class="row">
+
+            {{#if unique_projeler}}
+
+            <ul class="sticky-list">
+              {{#each unique_projeler as |proje|}}
+              <div class="col-md-2">
+
+                <li data-aos="flip-up" data-aos-delay="500" class="sticky-item">
+                  <a href="/projeler/{{proje.id}}">
+                    <i class="fa-solid fa-paperclip"></i>
+                    <h2>{{proje.proje_ismi}}</h2>
+                    <p>{{proje.proje_kategorisi}}</p>
+                  </a>
+                </li>
+              </div>
+
+              {{/each}}
+
+            </ul>
+
+            {{else}}
+
+            <h5 class="text-white ms-2">Bu kullanıcı henüz proje kütüphanesine bir proje eklememiş.</h5>
+
+
+
+            {{/if}}
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div data-aos="slide-right" class="tm-sticky-super">
+        <div class="tm-sticky-wrapper">
+          <h4 class="m-4 text-center text-white bg-dark p-2 rounded-2">İlan Panosuna Eklenmiş Projeler</h4>
+          <div class="row">
+
+            {{#if unique_ilanlar}}
+
+            <ul class="sticky-list">
+              {{#each unique_ilanlar as |ilan|}}
+              <div class="col-md-2 m-3">
+                <li data-aos="flip-down" data-aos-delay="500" class="sticky-item">
+                  <a>
+                    <i class="fa-solid fa-paperclip"></i>
+                    <h2>{{ilan.ilan_basligi}}</h2>
+                    <p>{{ilan.ilan_tarihi}}</p>
+                  </a>
+                </li>
+              </div>
+
+              {{/each}}
+
+            </ul>
+
+            {{else}}
+
+            <h5 class="text-white ms-2">Bu kullanıcı henüz ilan panosuna bir ilan eklememiş.</h5>
+
+
+            {{/if}}
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+  </section>
+
+
+
+
+  <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="../js/profil.js"></script>
+
+
+
+</body>
+
+</html>

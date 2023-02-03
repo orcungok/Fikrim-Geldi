@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şifremi Güncelle</title>
+
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/şifremi_unuttum.css">
+    <link rel="stylesheet" href="/css/custom-sheets/scrollbar.css">
+
+
+
+</head>
+
+<body>
+
+
+    <h1 class="mb-5 mt-5">FİKRİNİZİ PAYLAŞMAK İÇİN HENÜZ ÇOK GEÇ DEĞİL <i class="fa-solid fa-face-smile"></i></h1>
+
+    <div class="container d-flex flex-column">
+        <div class="row align-items-center justify-content-center
+      g-0">
+            <div class="col-12 col-md-8 col-lg-4 border-top border-5 border-dark">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            {{#ifCond msg '==' 'Şifreler Eşleşmiyor'}}
+                            <p class="{{msg_type}} mb-5 fs-4 fw-bold text-center">{{msg}}</p>
+                            {{/ifCond}}
+
+                            {{#ifCond msg '==' 'Şifreniz başarıyla değiştirildi!'}}
+                            <div class="container d-flex justify-content-center">
+
+                                <p class="{{msg_type}} mb-5 fs-4 fw-bold text-center">{{msg}}</p>
+                                <a class="text-center" href="/giris_yap">Şimdi Giriş Yapın</a>
+
+                            </div>
+
+                            {{/ifCond}}
+
+                            <h3 class="text-center">Lütfen yeni şifrenizi giriniz</h3>
+
+                        </div>
+                        <form action="/sifremi_guncelle" method="post">
+                            <div class="mb-3">
+                                <label for="new_password" class="form-label">Yeni Şifreniz</label>
+                                <input type="password" id="new_password" class="form-control" name="new_password"
+                                    placeholder="Yeni Şifreniz" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new_password_confirm" class="form-label">Yeni Şifreniz(Tekrar)</label>
+                                <input type="password" id="new_password_confirm" class="form-control"
+                                    name="new_password_confirm" placeholder="Yeni Şifreniz(Tekrar)" required>
+                            </div>
+                            <div class="mb-3 mt-3 d-grid">
+                                <button type="submit" class="btn fw-bold fs-5" name="{{token}}">
+                                    Şifremi Güncelle
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <script src="../bootstrap/dist/js/bootstrap.js"></script>
+
+
+</body>
+
+</html>

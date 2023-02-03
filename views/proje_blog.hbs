@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Proje Detayları</title>
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/custom-sheets/navbar.css">
+    <link href="../css/proje_blog.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/custom-sheets/scrollbar.css">
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+    <header>
+
+        {{>navbar}}
+
+    </header>
+
+    {{#each unique_proje as |unique|}}
+
+
+    <div class="container-fluid project-item-wrapper p-0 overflow-x-hidden">
+
+        <div class="row">
+
+            <div class="col">
+
+                <div class="card border-0">
+                    <img data-aos="fade-up-right" data-aos-duration="1000" class="img-fluid card-img"
+                        src="../images/randomForLibrary/{{unique.proje_resmi_url}}">
+                    <div style="border: 1px solid white;" data-aos="fade-down" data-aos-delay="1000"
+                        class="card-img-overlay d-flex text-white">
+                        <div class="my-auto mx-auto text-center fw-bolder">
+                            <h1 class="card-title display-1">{{unique.proje_ismi}}</h1>
+                            <p class="card-text bg-black rounded-2"><span>{{unique.proje_eklenme_tarihi}}
+                                    tarihinde</span> <a href="/profil/{{unique.user_id}}">{{unique.projeyi_ekleyen}}</a>
+                                tarafından
+                                paylaşıldı</p>
+                        </div>
+                    </div>
+
+                    <div data-aos="fade-left" data-aos-duration="500" class="card-body">
+
+                        <p style="text-indent: 15px;">{{unique.proje_aciklamasi}}</p>
+
+                        <div class="container-fluid project-details">
+                            <div class="row">
+
+                                <div class="col-6 col-md-3">
+
+                                    <h2>Proje Takım Üyeleri</h2>
+                                    <p>{{unique.proje_takim_uyeleri}}</p>
+
+                                </div>
+                                <div class="col-6 col-md-3">
+
+                                    <h2>Şirket</h2>
+                                    <p>{{unique.sirket}}</p>
+
+                                </div>
+
+                                <div class="col-6 col-md-3">
+
+                                    <h2>Departman</h2>
+                                    <p>{{unique.departman}}</p>
+
+                                </div>
+
+
+                                <div class="col-6 col-md-3">
+
+                                    <h2>Proje Kategorisi</h2>
+                                    <p>{{unique.proje_kategorisi}}</p>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="mt-5">
+
+                            <p class="fw-bold">
+
+                                Proje dosyalarını <a href="../user_files/{{unique.proje_dosyalari_url}}" download>
+                                    şimdi indirin</a>
+
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+    {{/each}}
+
+
+
+    <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/proje_blog.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+
+</body>
+
+</html>

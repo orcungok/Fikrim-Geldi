@@ -1,0 +1,92 @@
+<nav class="navbar fixed-top navbar-expand-xl main-navbar">
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center nav-items-wrapper">
+            <div class="nav-logo-wrapper d-block justify-content-center">
+
+                <a href="/anasayfa"><img width="120" height="120" src="/images/logos/navbar-logo.png" alt=""></a>
+
+            </div>
+            <button class="navbar-toggler m-4" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <img class="img-fluid" src="../../images/logos/navbar-logo.png" alt="">
+                    {{!-- <h2 class="offcanvas-title" id="offcanvasNavbarLabel">FİKRİM GELDİ</h2> --}}
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/anasayfa"><i class="fa-solid fa-house"></i> Anasayfa</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-book-open-reader"></i> Proje Kütüphanesi
+                            </a>
+                            <ul class="dropdown-menu dropdown_menu--animated">
+                                <li><a class="dropdown-item" href="/proje_kutuphanesi"><i class="fa-solid fa-cubes"></i>
+                                        Kütüphaneye Göz At</a></li>
+
+                                <li><a class="dropdown-item" href="/proje_ekle"><i class="fa-solid fa-square-pen"></i>
+                                        Kütüphaneye Bir Proje Ekle</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-people-group"></i> Takım Arkadaşı Bul
+                            </a>
+                            <ul class="dropdown-menu dropdown_menu--animated">
+                                <li><a class="dropdown-item" href="/takim_arkadasi_ilan_panosu"><i
+                                            class="fa-solid fa-chalkboard"></i>
+                                      Takım Arkadaşı İlan Panosuna Göz At</a></li>
+
+                                <li><a class="dropdown-item" href="/takim-arkadasi-ilani-ver"><i
+                                            class="fa-solid fa-user-pen"></i>
+                                        Bir Takım Arkadaşı İlanı Ver</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-people-group"></i> Danışmanlık Al
+                            </a>
+                            <ul class="dropdown-menu dropdown_menu--animated">
+                                <li><a class="dropdown-item" href="#"><i
+                                            class="fa-solid fa-chalkboard"></i>
+                                       Danışmanlık Panosuna Göz At</a></li>
+
+                                <li><a class="dropdown-item" href="#"><i
+                                            class="fa-solid fa-user-pen"></i>
+                                        Bir Danışmanlık İlanı Ver</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" aria-current="page"><i class="fa-solid fa-lightbulb"></i>
+                                Fikrini
+                                Geliştir</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profil/{{user_id}}"><i class="fa-solid fa-address-card"></i>
+                                Profil</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/giris_yap"><i class="fa-solid fa-right-from-bracket"></i> Çıkış
+                                Yap</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>
