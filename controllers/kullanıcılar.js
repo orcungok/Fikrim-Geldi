@@ -123,13 +123,13 @@ exports.register = (req, res) => {
         const transporter = nodemailer.createTransport({
           service: "outlook",
           auth: {
-            user: "orcungok_gs@hotmail.com",
-            pass: "-170315044Cs",
+            user: process.env.EMAIL_NAME,
+            pass: process.env.EMAIL_PASS,
           },
         });
 
         const mailOptions = {
-          from: "orcungok_gs@hotmail.com",
+          from: process.env.EMAIL_NAME,
           to: "orcungok20@gmail.com",
           subject: "Üyeliğin Başarıyla Oluşturuldu",
           text: `Fikrim Geldi'ye Hoş Geldin ${name}`,
@@ -220,13 +220,13 @@ exports.forgot_password = (req, res) => {
               const transporter = nodemailer.createTransport({
                 service: "outlook",
                 auth: {
-                  user: "orcungok_gs@hotmail.com",
-                  pass: "-170315044Cs",
+                  user: process.env.EMAIL_NAME,
+                  pass: process.env.EMAIL_PASS,
                 },
               });
 
               const mailOptions = {
-                from: "orcungok_gs@hotmail.com",
+                from: process.env.EMAIL_NAME,
                 to: `${email}`,
                 subject: "Fikrim Geldi Şifre Sıfırlama",
                 html:
