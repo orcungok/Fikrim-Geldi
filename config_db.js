@@ -4,6 +4,8 @@ const config = {
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
     database: process.env.DATABASE_LOGIN,
+    socketPath: '/var/run/mysqld/mysqld.sock'
+
   },
 
   db_projeler: {
@@ -11,6 +13,8 @@ const config = {
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
     database: process.env.DATABASE_PROJELER,
+    socketPath: '/var/run/mysqld/mysqld.sock'
+
   },
 
   db_takim_arkadasi_ilanlari: {
@@ -18,6 +22,8 @@ const config = {
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
     database: process.env.DATABASE_TAKIM_ARKADASI_ILANLARI,
+    socketPath: '/var/run/mysqld/mysqld.sock'
+
   },
 };
 
