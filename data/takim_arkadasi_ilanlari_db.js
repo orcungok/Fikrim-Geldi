@@ -11,7 +11,6 @@ db_takim_arkadasi_ilanlari.connect(function (err) {
   }
 
   console.log("Takim arkadasi ilanlari veritabanina basari ile baglandiniz");
-  db_takim_arkadasi_ilanlari.end()
 });
 
 module.exports = db_takim_arkadasi_ilanlari.promise();
