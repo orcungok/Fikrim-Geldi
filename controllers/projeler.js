@@ -1,4 +1,3 @@
-// const mysql = require("mysql2");
 const projeler_db = require("../data/projeler_db");
 const login_db = require("../data/login_db");
 
@@ -57,12 +56,12 @@ exports.getAdminApprovedProjects = async (req, res) => {
           endingLink,
           numberOfPages,
           email,
-          user_id
+          user_id,
         });
       } else {
         let user_id = req.user.ID;
         let email = req.user.EMAIL;
-        return res.render("proje_kütüphanesi", { email,user_id });
+        return res.render("proje_kütüphanesi", { email, user_id });
       }
     } else {
       res.status(401).redirect("/");
@@ -106,27 +105,20 @@ exports.getProjectBlog = async (req, res) => {
       const unique_proje = allDb[0];
 
       if (unique_proje.length > 0) {
-        login_db.query(
-          "select * from users where email=?",
+        const proje = await projeler_db.query(`select * from proje_detaylari_admin where email=?`, [
           unique_proje[0].email,
-          async (error, result) => {
-            if (error) {
-              console.log(error);
-            }
+        ]);  //proje iki elemanlı uzun bir dizi , proje[0] içinde tek bir obje olan bir dizi , proje[0][0] objenin kendisi
 
-            let sirket = result[0].COMPANY;
-            let departman = result[0].DEPARTMENT;
-            unique_proje[0].sirket = sirket;
-            unique_proje[0].departman = departman;
-            //console.log(unique_proje) ;
+        let sirket = proje[0][0].COMPANY;
+        let departman = proje[0][0].DEPARTMENT;
+        unique_proje[0].sirket = sirket;
+        unique_proje[0].departman = departman;
 
-            res.render("proje_blog", {
-              unique_proje: unique_proje,
-              user_email,
-              user_id
-            });
-          }
-        );
+        res.render("proje_blog", {
+          unique_proje: unique_proje,
+          user_email,
+          user_id,
+        });
       } else {
         res.render("error");
       }
@@ -135,7 +127,6 @@ exports.getProjectBlog = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.render("error");
   }
 };
 

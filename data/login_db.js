@@ -10,4 +10,5 @@ login_db.connect(function (err) {
   console.log("Kullanici bilgileri veritabanina başariyla baglandiniz.");
 });
 
-module.exports = login_db;
+module.exports = login_db.promise();
+

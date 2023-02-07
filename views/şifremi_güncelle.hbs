@@ -19,7 +19,7 @@
 <body>
 
 
-    <h1 class="mb-5 mt-5">FİKRİNİZİ PAYLAŞMAK İÇİN HENÜZ ÇOK GEÇ DEĞİL <i class="fa-solid fa-face-smile"></i></h1>
+    <h1 class="mb-5 mt-5 text-white">FİKRİNİZİ PAYLAŞMAK İÇİN HENÜZ ÇOK GEÇ DEĞİL <i class="fa-solid fa-face-smile"></i></h1>
 
     <div class="container d-flex flex-column">
         <div class="row align-items-center justify-content-center
@@ -28,24 +28,14 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="mb-4">
-                            {{#ifCond msg '==' 'Şifreler Eşleşmiyor'}}
+                            {{#if msg}}
                             <p class="{{msg_type}} mb-5 fs-4 fw-bold text-center">{{msg}}</p>
-                            {{/ifCond}}
-
-                            {{#ifCond msg '==' 'Şifreniz başarıyla değiştirildi!'}}
-                            <div class="container d-flex justify-content-center">
-
-                                <p class="{{msg_type}} mb-5 fs-4 fw-bold text-center">{{msg}}</p>
-                                <a class="text-center" href="/giris_yap">Şimdi Giriş Yapın</a>
-
-                            </div>
-
-                            {{/ifCond}}
+                            {{/if}}
 
                             <h3 class="text-center">Lütfen yeni şifrenizi giriniz</h3>
 
                         </div>
-                        <form action="/sifremi_guncelle" method="post">
+                        <form id="update_pass" action="/sifremi_guncelle" method="post">
                             <div class="mb-3">
                                 <label for="new_password" class="form-label">Yeni Şifreniz</label>
                                 <input type="password" id="new_password" class="form-control" name="new_password"
@@ -61,6 +51,9 @@
                                     Şifremi Güncelle
                                 </button>
                             </div>
+
+                            <div><a href="/giris_yap">Giriş Yapma Sayfasına Dön</a></div>
+
                         </form>
 
                     </div>
@@ -74,6 +67,7 @@
 
 
     <script src="../bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../js/şifremi_güncelle.js"></script>
 
 
 </body>

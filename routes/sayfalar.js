@@ -70,8 +70,11 @@ router.get(
   (req, res) => {}
 );
 
-router.get("/projeler/", (req, res) => {
-  res.status(404).render("error");
+router.get("/projeler", userController.isLoggedIn, (req, res) => {
+
+  res.render('error') ;
+
+
 });
 
 router.post(
@@ -124,6 +127,7 @@ router.get("/sifremi_guncelle", (req, res) => {
 router.post("/sifremi_guncelle", userController.update_password, (req, res) => {
   res.render("şifremi_güncelle");
 });
+
 
 router.get(
   "/takim_arkadasi_ilan_panosu",
