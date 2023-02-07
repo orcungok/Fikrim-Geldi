@@ -7,6 +7,7 @@ const db_takim_arkadasi_ilanlari = mySql.createConnection(
 db_takim_arkadasi_ilanlari.connect(function (err) {
   if (err) {
     console.log(err);
+    return ; 
   }
 
   console.log("Takim arkadasi ilanlari veritabanina basari ile baglandiniz");
