@@ -9,6 +9,7 @@ connection_projeler.connect(function (err) {
   }
 
   console.log("Proje Detaylari veritabanina başari ile baglandiniz");
+  connection_projeler.end();
 });
 
 module.exports = connection_projeler.promise();
