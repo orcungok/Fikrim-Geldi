@@ -74,7 +74,7 @@ liveReloadServer.server.once("connection", () => {
 app.use(connectLiveReload());
 
 
-const PORT = 3307;
+const PORT = process.env.PORT||3307;
 app.listen(PORT, () => {
   console.log(`Server started @ ${PORT}`);
 });
