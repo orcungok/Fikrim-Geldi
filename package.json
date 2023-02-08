@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js ",
-    "dev" : "nodemon --ext * app.js",
+    "dev": "nodemon --ext * app.js",
     "sass:compile": "sass --watch --no-source-map public/scss/takim_arkadasi_ilan_panosu.scss public/css/takim_arkadasi_ilan_panosu.css"
   },
   "keywords": [],
