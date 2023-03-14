@@ -228,8 +228,8 @@ exports.getProjectBlog = async (req, res) => {
         unique_proje.forEach((proje) => {
           const dom = new JSDOM(proje.proje_aciklamasi);
 
-           proje.proje_takim_uyeleri =  JSON.parse(proje.proje_takim_uyeleri)
-           proje.proje_takim_uyeleri_gorevleri = JSON.parse(proje.proje_takim_uyeleri_gorevleri)
+          //  proje.proje_takim_uyeleri =  JSON.parse(proje.proje_takim_uyeleri)
+          //  proje.proje_takim_uyeleri_gorevleri = JSON.parse(proje.proje_takim_uyeleri_gorevleri)
 
           // Render the DOM content on a web page
           const renderedContent = dom.window.document.querySelector(
