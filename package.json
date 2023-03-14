@@ -1,6 +1,6 @@
 {
   "name": "fg",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "İnci Holding kurum içi girişimcilik projesidir",
   "main": "app.js",
   "scripts": {

@@ -4,7 +4,7 @@ const router = express.Router();
 const userController = require("../controllers/kullanıcılar");
 const projectController = require("../controllers/projeler");
 const profileController = require("../controllers/profil_controller");
-const teamMateAnnController = require("../controllers/takim_arkadasi_ilanlari");
+// const teamMateAnnController = require("../controllers/takim_arkadasi_ilanlari");
 const adminPanelController = require("../controllers/admin_panel");
 
 router.get(["/", "/giris_yap"], (req, res) => {
@@ -43,8 +43,6 @@ router.post(
   adminPanelController.postFromAdminPanel,
   (req, res) => {}
 );
-
-
 
 router.get(
   "/proje_kutuphanesi",
@@ -91,13 +89,6 @@ router.get(
   (req, res) => {}
 );
 
-router.get(
-  "/ilanlari_ara",
-  userController.isLoggedIn,
-  teamMateAnnController.taAnn_search,
-  (req, res) => {}
-);
-
 router.get("/sifremi_unuttum", function (req, res) {
   res.render("şifremi_unuttum");
 });
@@ -115,35 +106,42 @@ router.post("/sifremi_guncelle", userController.update_password, (req, res) => {
   res.render("şifremi_güncelle");
 });
 
-router.get(
-  "/takim_arkadasi_ilan_panosu",
-  userController.isLoggedIn,
-  teamMateAnnController.getAdminApprovedAnns,
-  (req, res) => {}
-);
+// router.get(
+//   "/ilanlari_ara",
+//   userController.isLoggedIn,
+//   teamMateAnnController.taAnn_search,
+//   (req, res) => {}
+// );
 
-router.get(
-  "/takim_arkadasi_ilan_panosu/:sirket",
-  userController.isLoggedIn,
-  teamMateAnnController.getFilteredAnns,
-  (req, res) => {}
-);
+// router.get(
+//   "/takim_arkadasi_ilan_panosu",
+//   userController.isLoggedIn,
+//   teamMateAnnController.getAdminApprovedAnns,
+//   (req, res) => {
 
-router.get(
-  "/takim-arkadasi-ilani-ver",
-  userController.isLoggedIn,
-  (req, res) => {
-    res.render("ta_ilan_ver", { user_id: req.user.ID });
-  }
-);
+//   }
+// );
 
-router.post(
-  "/takim-arkadasi-ilani-ver",
-  userController.isLoggedIn,
-  teamMateAnnController.postAnnToAdminPage,
-  (req, res) => {}
-);
+// router.get(
+//   "/takim_arkadasi_ilan_panosu/:sirket",
+//   userController.isLoggedIn,
+//   teamMateAnnController.getFilteredAnns,
+//   (req, res) => {}
+// );
+
+// router.get(
+//   "/takim-arkadasi-ilani-ver",
+//   userController.isLoggedIn,
+//   (req, res) => {
+//     res.render("ta_ilan_ver", { user_id: req.user.ID });
+//   }
+// );
+
+// router.post(
+//   "/takim-arkadasi-ilani-ver",
+//   userController.isLoggedIn,
+//   teamMateAnnController.postAnnToAdminPage,
+//   (req, res) => {}
+// );
 
 module.exports = router;
-
-

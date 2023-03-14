@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-const login_db = require("../data/login_db");
+const db_fg = require("../data/db_fg");
 const nodemailer = require("nodemailer");
 const emailValidator = require("deep-email-validator");
 const randToken = require("rand-token");
@@ -10,7 +10,7 @@ const { token } = require("morgan");
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await login_db.query(`select * from users where email = ?`, [
+    const user = await db_fg.query(`select * from users where email = ?`, [
       email,
     ]);
 
@@ -51,7 +51,7 @@ exports.register = async (req, res) => {
     } = req.body;
 
 
-    const [user] = await login_db.query(
+    const [user] = await db_fg.query(
       "select email from users where email=?",
       [email]
     );
@@ -80,7 +80,7 @@ exports.register = async (req, res) => {
     const r_token = randToken.generate(20);
     const hashedPassword = await bcrypt.hash(password, 8);
 
-    const registerUser = await login_db.query("insert into users set ?", {
+    const registerUser = await db_fg.query("insert into users set ?", {
       name,
       surname,
       email,
@@ -127,7 +127,7 @@ exports.isLoggedIn = async (req, res, next) => {
         process.env.JWT_SECRET
       );
 
-      const user = await login_db.query(`select * from users where id = ?`, [
+      const user = await db_fg.query(`select * from users where id = ?`, [
         [decode.id],
       ]);
 
@@ -157,12 +157,12 @@ exports.forgot_password = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const currentEmail = await login_db.query(
+    const currentEmail = await db_fg.query(
       `select email from users where email=?`,
       [email]
     );
     if (currentEmail[0].length > 0) {
-      const token = await login_db.query(
+      const token = await db_fg.query(
         `select token from users where email=?`,
         [email]
       );
@@ -229,7 +229,7 @@ exports.update_password = async (req, res) => {
     let r_token = randToken.generate(20);
     let new_hashedPassword = await bcrypt.hash(new_password, 8);
 
-    let setPass = await login_db.query(
+    let setPass = await db_fg.query(
       `update users set pass='${new_hashedPassword}'where token='${token}'`
     );
     res.render("şifremi_güncelle", {
@@ -237,7 +237,7 @@ exports.update_password = async (req, res) => {
       msg_type: "good",
     });
 
-    let setToken = await login_db.query(
+    let setToken = await db_fg.query(
       `update users set token='${r_token}'where PASS='${new_hashedPassword}'`
     );
   }
