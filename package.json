@@ -12,29 +12,28 @@
   "author": "Orçun Gök",
   "license": "ISC",
   "devDependencies": {
-    "aos": "^2.3.4",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^5.3.0-alpha1",
+    "bootstrap": "^5.2.3",
     "connect-livereload": "^0.6.1",
     "cookie-parser": "^1.4.6",
     "deep-email-validator": "^0.1.21",
     "dompurify": "^3.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-handlebars": "^6.0.7",
     "hbs": "^4.2.0",
-    "jsdom": "^21.1.0",
+    "jsdom": "^21.1.1",
     "jsonwebtoken": "^9.0.0",
     "livereload": "^0.9.3",
     "morgan": "^1.10.0",
-    "mysql2": "^3.1.2",
-    "nodemailer": "^6.8.0",
-    "nodemon": "^2.0.20",
-    "paginationjs": "^2.5.0",
+    "mysql2": "^3.2.0",
+    "nodemailer": "^6.9.1",
+    "paginationjs": "^2.5.1",
     "rand-token": "^1.0.1",
     "sanitize-html": "^2.10.0",
-    "sass": "^1.57.1",
-    "wow.js": "^1.2.2"
+    "sass": "^1.59.2"
   }
 }
