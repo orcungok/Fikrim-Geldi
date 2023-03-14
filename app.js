@@ -17,7 +17,7 @@ hbs.registerPartials(partialsPath);
 app.set("views", path.join(__dirname, "views/"));
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static("public"));
 app.use(express.static("node_modules"));
@@ -70,6 +70,16 @@ app.use("/", require("./routes/sayfalar"));
 app.use("/", require("./routes/auth"));
 
 
+// handle 404 error
+app.use((req, res, next) => {
+  res.status(404).render("error");
+});
+
+// handle other errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("<h1>Bir şeyler çok yanlış gitti! <!h1>");
+});
 
 const livereload = require("livereload");
 const connectLiveReload = require("connect-livereload");
@@ -85,3 +95,34 @@ const PORT = process.env.PORT || 3307;
 app.listen(PORT, () => {
   console.log(`Server started @ ${PORT}`);
 });
+
+// const { exec } = require('child_process');
+
+// const databaseHost = process.env.DATABASE_HOST;
+
+// exec(`ping -c 3 ${databaseHost}`, (error, stdout, stderr) => {
+//   if (error) {
+//     console.error(`Error occurred while pinging database host ${databaseHost}: ${error.message}`);
+//     return;
+//   }
+//   if (stderr) {
+//     console.error(`Error occurred while pinging database host ${databaseHost}: ${stderr}`);
+//     return;
+//   }
+//   console.log(`Ping results for database host ${databaseHost}:`);
+//   console.log(stdout);
+// });
+
+// const domainName = 'sql7.freemysqlhosting.net';
+
+// exec(`nslookup ${domainName}`, (error, stdout, stderr) => {
+//   if (error) {
+//     console.error(`Error executing command: ${error.message}`);
+//     return;
+//   }
+//   if (stderr) {
+//     console.error(`Command stderr: ${stderr}`);
+//     return;
+//   }
+//   console.log(`Command stdout: ${stdout}`);
+// });
