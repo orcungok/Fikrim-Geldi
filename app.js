@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
-const doenv = require("dotenv");
+const dotenv = require("dotenv");
 const path = require("path");
 const hbs = require("hbs");
 const cookieParser = require("cookie-parser");
 
 app.use(express.urlencoded({ extended: false }));
 
-doenv.config({
+dotenv.config({
   path: "./.env",
 });
 
