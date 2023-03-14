@@ -17,6 +17,7 @@ exports.getPersonalData = async (req, res) => {
         `select * from proje_detaylari_admin where user_id='${user_id}'`
       );
       const unique_projeler = allDb[0];
+      let  upLength = unique_projeler.length ; 
 
       const allDb_TA = await takim_arkadasi_ilanlari_db.query(
         `select * from ta_ilanlari_admin where user_id='${user_id}'`
@@ -29,31 +30,9 @@ exports.getPersonalData = async (req, res) => {
         unique_user: user[0],
         user_id,
         email,
+        upLength
       });
-      //   "select * from users where id=?",
-      //   [user_id],
-      //   async (error, result) => {
-      //     const allDb = await projeler_db.query(
-      //       `select * from proje_detaylari_admin where user_id='${user_id}'`
-      //     );
-
-      //     const unique_projeler = allDb[0];
-
-      //     const allDb_TA = await takim_arkadasi_ilanlari_db.query(
-      //       `select * from ta_ilanlari_admin where user_id='${user_id}'`
-      //     );
-      //     const unique_ilanlar = allDb_TA[0];
-      //     //console.log(unique_ilanlar)
-
-      //     res.render("profil", {
-      //       unique_projeler: unique_projeler,
-      //       unique_ilanlar: unique_ilanlar,
-      //       unique_user: result,
-      //       user_id,
-      //       email,
-      //     });
-      //   }
-      // );
+      
     } else {
       res.status(401).redirect("/");
     }

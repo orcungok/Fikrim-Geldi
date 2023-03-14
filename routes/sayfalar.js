@@ -1,16 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { promisify } = require("util");
 
 const userController = require("../controllers/kullanıcılar");
 const projectController = require("../controllers/projeler");
-const addProjectController = require("../controllers/proje_ekle_ap");
 const profileController = require("../controllers/profil_controller");
 const teamMateAnnController = require("../controllers/takim_arkadasi_ilanlari");
 const adminPanelController = require("../controllers/admin_panel");
-
-const { token } = require("morgan");
-const { type } = require("os");
 
 router.get(["/", "/giris_yap"], (req, res) => {
   res.render("giriş_yap");
@@ -49,18 +44,13 @@ router.post(
   (req, res) => {}
 );
 
-router.get(
-  "/proje_kutuphanesi/:kategori",
-  userController.isLoggedIn,
-  projectController.getFilteredProjects,
-  (req, res) => {}
-);
+
 
 router.get(
   "/proje_kutuphanesi",
   userController.isLoggedIn,
   projectController.getAdminApprovedProjects,
-  async (req, res, next) => {}
+  (req, res) => {}
 );
 
 router.get(
@@ -71,16 +61,13 @@ router.get(
 );
 
 router.get("/projeler", userController.isLoggedIn, (req, res) => {
-
-  res.render('error') ;
-
-
+  res.render("error");
 });
 
 router.post(
   "/proje_ekle",
   userController.isLoggedIn,
-  addProjectController.add_projects_ap,
+  projectController.add_projects_ap,
   (req, res) => {}
 );
 
@@ -128,7 +115,6 @@ router.post("/sifremi_guncelle", userController.update_password, (req, res) => {
   res.render("şifremi_güncelle");
 });
 
-
 router.get(
   "/takim_arkadasi_ilan_panosu",
   userController.isLoggedIn,
@@ -159,3 +145,5 @@ router.post(
 );
 
 module.exports = router;
+
+

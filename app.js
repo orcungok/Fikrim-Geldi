@@ -5,6 +5,8 @@ const path = require("path");
 const hbs = require("hbs");
 const cookieParser = require("cookie-parser");
 
+app.use(express.urlencoded({ extended: false }));
+
 doenv.config({
   path: "./.env",
 });
@@ -23,7 +25,6 @@ app.use(express.static("node_modules"));
 //-----------------------------HANDLEBARS CONFIG---------------------------------------------------//
 
 app.set("view engine", "hbs");
-
 hbs.registerHelper("ifCond", function (v1, operator, v2, options) {
   switch (operator) {
     case "==":
@@ -56,6 +57,12 @@ hbs.registerHelper("for", function (from, to, incr, block) {
 
   return accum;
 });
+hbs.registerHelper("indexPlusOne", function (index) {
+  return index + 1;
+});
+hbs.registerHelper("lookup", function (obj, key) {
+  return obj[key];
+});
 
 //-----------------------------HANDLEBARS CONFIG---------------------------------------------------//
 
@@ -73,8 +80,7 @@ liveReloadServer.server.once("connection", () => {
 });
 app.use(connectLiveReload());
 
-
-const PORT = process.env.PORT||3307;
+const PORT = process.env.PORT || 3307;
 app.listen(PORT, () => {
   console.log(`Server started @ ${PORT}`);
 });

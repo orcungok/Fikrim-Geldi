@@ -8,14 +8,19 @@
   <title>Profil</title>
 
   <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" type="text/css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="../css/wow.css">
+
+
+
   <link rel="stylesheet" href="/css/custom-sheets/navbar.css">
-  <link rel="stylesheet" href="../css/profil.css" type="text/css">
   <link rel="stylesheet" href="/css/custom-sheets/scrollbar.css">
+  <link rel="stylesheet" href="../css/profil.css" type="text/css">
 
 
 </head>
@@ -30,7 +35,7 @@
 
 
   {{#each unique_user as |user|}}
-  <section data-aos="fade-up" id="kullanıcı-şahsi-bilgileri">
+  <section class="animate__animated animate__fadeInLeft" data-aos="fade-up" id="kullanıcı-şahsi-bilgileri">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
@@ -90,7 +95,7 @@
                     <div class="card-body">
                       <i class="fa-solid fa-business-time rounded-3 mb-4"></i>
                       <h3 class="h5 mb-3">Kariyer</h3>
-                      <p class="mb-0">İnci Holding'te Genç İnci olarak çalışıyor</p>
+                      <p class="mb-0">İnci Holding lorem lorem lorem lorem</p>
                     </div>
                   </div>
                 </div>
@@ -99,7 +104,7 @@
                     <div class="card-body">
                       <i class="fa-solid fa-gear rounded-3 mb-4"></i>
                       <h3 class="h5 mb-3">Tecrübe</h3>
-                      <p class="mb-0">Askerliğini yapmış, en az 5 yıl tecrübeli eleman aranıyor</p>
+                      <p class="mb-0">lorem lorem lorem lorem lorem</p>
                     </div>
                   </div>
                 </div>
@@ -158,30 +163,147 @@
 
 
 
-  <section id="kullanıcı-modül-bilgileri">
+  <section class="mb-5" id="kullanıcı-modül-bilgileri">
+
 
     <div class="profile-modules-main-wrapper overflow-x-hidden">
 
-      <div data-aos="slide-left" class="project-sticky-super">
 
-        <div class="project-sticky-wrapper">
-          <h4 class="m-4 text-center text-white bg-dark p-2 rounded-2">Proje Kütüphanesine Eklenmiş Projeler</h4>
-          <div class="row">
+
+
+
+
+      <button class="section-toggle wow fadeIn" data-bs-toggle="collapse" data-bs-target="#project-sticky-super"
+        aria-expanded="false" aria-controls="section-content">
+        <span class="toggle-label">Proje Kütüphanesine Eklenen Projeler</span>
+        <i class="bi bi-chevron-down toggle-icon"></i>
+      </button>
+
+
+      <div id="project-sticky-super" class="project-sticky-super collapse mt-3">
+
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-uretim-tab" data-bs-toggle="pill" data-bs-target="#pills-uretim"
+              type="button" role="tab" aria-controls="pills-uretim" aria-selected="true">Üretim</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-arge-tab" data-bs-toggle="pill" data-bs-target="#pills-arge"
+              type="button" role="tab" aria-controls="pills-arge" aria-selected="false">Arge</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-hizmet-tab" data-bs-toggle="pill" data-bs-target="#pills-hizmet"
+              type="button" role="tab" aria-controls="pills-hizmet" aria-selected="false">Hizmet</button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-kss-tab" data-bs-toggle="pill" data-bs-target="#pills-kss" type="button"
+              role="tab" aria-controls="pills-kss" aria-selected="false">Kurumsal Sosyal Sorumluluk</button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button"
+              role="tab" aria-controls="pills-all" aria-selected="false">Tüm Projeler</button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active project-sticky-wrapper" id="pills-uretim" role="tabpanel"
+            aria-labelledby="pills-uretim-tab" tabindex="0">
 
             {{#if unique_projeler}}
 
             <ul class="sticky-list">
               {{#each unique_projeler as |proje|}}
-              <div class="col-md-2">
 
-                <li data-aos="flip-up" data-aos-delay="500" class="sticky-item">
+              {{#ifCond proje.proje_kategorisi '==' 'Üretim'}}
+
+              <div class="col-md-2">
+                <li class="sticky-item animate__animated animate__rollIn">
                   <a href="/projeler/{{proje.id}}">
                     <i class="fa-solid fa-paperclip"></i>
                     <h2>{{proje.proje_ismi}}</h2>
-                    <p>{{proje.proje_kategorisi}}</p>
+                    <p class="project-category">{{proje.proje_kategorisi}}</p>
                   </a>
                 </li>
               </div>
+
+
+              {{/ifCond}}
+
+              {{/each}}
+
+            </ul>
+
+            {{else}}
+
+            <h5 class="text-white ms-2">Bu kullanıcı henüz proje kütüphanesine bir proje eklememiş.</h5>
+
+
+
+            {{/if}}
+
+
+          </div>
+          <div class="tab-pane fade project-sticky-wrapper" id="pills-arge" role="tabpanel"
+            aria-labelledby="pills-arge-tab" tabindex="0">
+
+            {{#if unique_projeler}}
+
+            <ul class="sticky-list">
+              {{#each unique_projeler as |proje|}}
+
+              {{#ifCond proje.proje_kategorisi '==' 'Arge'}}
+
+              <div class="col-md-2">
+                <li class="sticky-item wow rollIn">
+                  <a href="/projeler/{{proje.id}}">
+                    <i class="fa-solid fa-paperclip"></i>
+                    <h2>{{proje.proje_ismi}}</h2>
+                    <p class="project-category">{{proje.proje_kategorisi}}</p>
+                  </a>
+                </li>
+              </div>
+
+
+              {{/ifCond}}
+
+              {{/each}}
+
+            </ul>
+
+            {{else}}
+
+            <h5 class="text-white ms-2">Bu kullanıcı henüz proje kütüphanesine bir proje eklememiş.</h5>
+
+            {{/if}}
+
+          </div>
+          <div class="tab-pane fade project-sticky-wrapper" id="pills-hizmet" role="tabpanel"
+            aria-labelledby="pills-hizmet-tab" tabindex="0">
+
+
+            {{#if unique_projeler}}
+
+            <ul class="sticky-list">
+              {{#each unique_projeler as |proje|}}
+
+              {{#ifCond proje.proje_kategorisi '==' 'Hizmet'}}
+
+              <div class="col-md-2">
+                <li class="sticky-item wow rollIn">
+                  <a href="/projeler/{{proje.id}}">
+                    <i class="fa-solid fa-paperclip"></i>
+                    <h2>{{proje.proje_ismi}}</h2>
+                    <p class="project-category">{{proje.proje_kategorisi}}</p>
+                  </a>
+                </li>
+              </div>
+
+
+              {{/ifCond}}
 
               {{/each}}
 
@@ -197,15 +319,101 @@
 
 
 
+
+
+
+
+
+
+
+
+          </div>
+          <div class="tab-pane fade project-sticky-wrapper" id="pills-kss" role="tabpanel"
+            aria-labelledby="pills-kss-tab" tabindex="0">
+
+            {{#if unique_projeler}}
+
+            <ul class="sticky-list">
+              {{#each unique_projeler as |proje|}}
+
+              {{#ifCond proje.proje_kategorisi '==' 'Kurumsal Sosyal Sorumluluk'}}
+
+              <div class="col-md-2">
+                <li class="sticky-item wow rollIn">
+                  <a href="/projeler/{{proje.id}}">
+                    <i class="fa-solid fa-paperclip"></i>
+                    <h2>{{proje.proje_ismi}}</h2>
+                    <p class="project-category">{{proje.proje_kategorisi}}</p>
+                  </a>
+                </li>
+              </div>
+
+
+              {{/ifCond}}
+
+              {{/each}}
+
+            </ul>
+
+            {{else}}
+
+            <h5 class="text-white ms-2">Bu kullanıcı henüz proje kütüphanesine bir proje eklememiş.</h5>
+
+
+
+            {{/if}}
+
+
+
+
+
+
+
+
+          </div>
+          <div class="tab-pane fade project-sticky-wrapper" id="pills-all" role="tabpanel" aria-labelledby="pills-all"
+            tabindex="0">
+
+            {{#if unique_projeler}}
+
+            <ul class="sticky-list">
+              {{#each unique_projeler as |proje|}}
+
+
+              <div class="col-md-2">
+                <li class="sticky-item wow rollIn">
+                  <a href="/projeler/{{proje.id}}">
+                    <i class="fa-solid fa-paperclip"></i>
+                    <h2>{{proje.proje_ismi}}</h2>
+                    <p class="project-category">{{proje.proje_kategorisi}}</p>
+                  </a>
+                </li>
+              </div>
+
+
+
+              {{/each}}
+
+            </ul>
+
+            {{else}}
+
+            <h5 class="text-white ms-2">Bu kullanıcı henüz proje kütüphanesine bir proje eklememiş.</h5>
+
+
+
+
+
+
+            {{/if}}
+
+
+
           </div>
         </div>
       </div>
 
-
-
-
-
-      <div data-aos="slide-right" class="tm-sticky-super">
+      {{!-- <div data-aos="slide-right" class="tm-sticky-super">
         <div class="tm-sticky-wrapper">
           <h4 class="m-4 text-center text-white bg-dark p-2 rounded-2">İlan Panosuna Eklenmiş Projeler</h4>
           <div class="row">
@@ -240,17 +448,9 @@
 
           </div>
         </div>
-      </div>
-
-
-
-
-
+      </div> --}}
 
     </div>
-
-
-
 
   </section>
 
@@ -258,9 +458,9 @@
 
 
   <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="../js/wow.js"></script>
   <script>
-    AOS.init();
+    new WOW().init();
   </script>
   <script src="../js/profil.js"></script>
 

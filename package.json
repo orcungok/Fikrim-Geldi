@@ -1,17 +1,17 @@
 {
   "name": "fg",
-  "version": "1.5.0",
+  "version": "1.8.0",
   "description": "İnci Holding kurum içi girişimcilik projesidir",
   "main": "app.js",
   "scripts": {
     "start": "node app.js ",
-    "dev": "nodemon --ext * app.js",
-    "sass:compile": "sass --watch --no-source-map public/scss/takim_arkadasi_ilan_panosu.scss public/css/takim_arkadasi_ilan_panosu.css"
+    "dev": "nodemon app.js",
+    "sass:compile": "sass --watch --no-source-map public/scss/proje_kutuphanesi.scss public/css/proje_kutuphanesi.css"
   },
   "keywords": [],
   "author": "Orçun Gök",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "aos": "^2.3.4",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
@@ -19,16 +19,22 @@
     "connect-livereload": "^0.6.1",
     "cookie-parser": "^1.4.6",
     "deep-email-validator": "^0.1.21",
+    "dompurify": "^3.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-handlebars": "^6.0.7",
     "hbs": "^4.2.0",
+    "jsdom": "^21.1.0",
     "jsonwebtoken": "^9.0.0",
     "livereload": "^0.9.3",
     "morgan": "^1.10.0",
-    "mysql2": "^2.3.3",
+    "mysql2": "^3.1.2",
     "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20",
+    "paginationjs": "^2.5.0",
     "rand-token": "^1.0.1",
-    "sass": "^1.57.1"
+    "sanitize-html": "^2.10.0",
+    "sass": "^1.57.1",
+    "wow.js": "^1.2.2"
   }
 }

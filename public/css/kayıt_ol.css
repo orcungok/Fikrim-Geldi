@@ -260,19 +260,9 @@ body {
 
 .good {
   color: #00a68e;
-  animation-name: glow;
-  animation-duration: 0.2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }
 
 .error {
-  padding: 0;
-  margin: 0;
-  margin-left: 50%;
-  transform: translateX(-200%);
-  opacity: 0;
-  animation: slide-in 1s ease-out forwards;
   color: #ed1b24;
 }
 
@@ -294,28 +284,4 @@ body {
 
 .btn-close:active, .btn-close:focus {
   box-shadow: none;
-}
-
-@keyframes glow {
-  from {
-    text-shadow: 0px 0px 5px #fff, 0px 0px 5px #F99A1D;
-  }
-  to {
-    text-shadow: 0px 0px 20px #fff, 0px 0px 20px #F99A1D;
-  }
-}
-@keyframes slide-in {
-  20% {
-    opacity: 0;
-  }
-  60% {
-    transform: translateX(-45%);
-  }
-  75% {
-    transform: translateX(-52%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%);
-  }
 }

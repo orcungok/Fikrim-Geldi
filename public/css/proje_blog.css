@@ -1,40 +1,59 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-
-
-
 body {
   font-family: "Montserrat", sans-serif;
 }
 
-.card-img {
-  max-width: 100%;
-  height: 600px;
+.main-navbar {
+
+  font-weight: bold;
+
 }
+
+
+
 .project-item-wrapper {
   margin-top: 150px;
 }
 
-.card-img-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 600px;
-}
-
 a {
-  color: #f29d35;
+  color: #f43d38;
   text-decoration: none;
 }
 
 a:hover {
-  color: #f29d35;
+  color: #f43d38;
 }
 
-.project-details .row .col-md-3 {
+.project-metadata {
+  padding: 10px;
+  border-radius: 5px;
+}
 
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+.project-metadata ul,
+.project-data-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.project-metadata li {
+  margin: 20px;
+  color: black;
+  font-weight: bold;
+}
 
+.project-data-nav li {
+  margin: 20px;
+  font-weight: bold;
+}
 
+.project-content-wrapper h3,
+.project-teamMembers-container h3 {
+  color: #f99a1d;
+  font-weight: bold;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -51,4 +70,11 @@ a:hover {
   }
 }
 
+.darkmode-layer,
+.darkmode-toggle {
+  z-index: 1;
+}
+.darkmode--activated img {
+  filter: invert(1);
 
+  }

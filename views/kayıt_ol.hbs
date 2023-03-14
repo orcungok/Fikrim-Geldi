@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fikrim Geldi Kayıt Ol</title>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="../css/kayıt_ol.css">
   <link rel="stylesheet" href="/css/custom-sheets/scrollbar.css">
 
@@ -207,8 +207,7 @@
             doldurmak suretiyle Şirketimize iletmeniz gerekmektedir.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn fs-5 fw-bold"
-            data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn fs-5 fw-bold" data-bs-dismiss="modal">Kapat</button>
         </div>
       </div>
     </div>
@@ -235,7 +234,20 @@
 
           <div class="container overflow-x-hidden">
             {{#if msg}}
-            <p data-aos="slide-left" data-aos-duration="1000" class=" mb-3 {{msg_type}} fs-4 fw-bold">{{msg}}</p>
+
+            {{#ifCond msg_type '==' 'error'}}
+
+
+            <p class="mb-3 {{msg_type}} fs-4 fw-bold animate__animated animate__headShake">{{msg}}</p>
+
+
+            {{else}}
+
+            <p class="mb-3 {{msg_type}} fs-4 fw-bold animate__animated animate__bounceInLeft">{{msg}}</p>
+         
+
+            {{/ifCond}}
+
 
             {{/if}}
 
@@ -246,7 +258,7 @@
 
 
 
-          <form id="kayıt_ol_form" action="/kayit_ol" method="post" onsubmit="submitKayitOl()">
+          <form id="kayıt_ol_form" action="/kayit_ol" method="post">
 
             <div class="container-fluid">
               <div class="row">
@@ -361,10 +373,6 @@
 
 
   <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
   <script src="/js/kayıt_ol.js"></script>
 
 </body>

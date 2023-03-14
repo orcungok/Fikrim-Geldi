@@ -7,19 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Takım Arkadaşı Bul</title>
 
-
-    {{!-- Vendor CSS Files --}}
-
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css">
 
+     <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
 
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    {{!-- Vendor CSS Files --}}
 
     <link rel="stylesheet" href="/css/custom-sheets/navbar.css">
     <link rel="stylesheet" href="../css/takim_arkadasi_ilan_panosu.css">
@@ -47,7 +46,8 @@
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title fw-bold w-100">{{ilan.ilan_basligi}}</h5>
-                    <button type="button" class="btn-close modal-close-x" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close modal-close-x" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>{{ilan.ilan_aciklamasi}}</p>
@@ -228,16 +228,15 @@
 
                     <div data-aos="flip-down" data-aos-duration="800" data-aos-delay="500"
                         class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card text-white card-has-bg click-col" title="Detaylar için tıklayınız" data-bs-toggle="modal"
-                            data-bs-target="#{{ilan.id}}"
+                        <div class="card text-white card-has-bg click-col" title="Detaylar için tıklayınız"
                             style="background-image:url('../images/randomForLibrary/{{ilan.proje_resmi_url}}'); background-size: cover;">
                             <div class="card-img-overlay d-flex flex-column">
                                 <div class="card-body">
                                     <h5 class="card-meta text-center mb-5"><a class="ilan_projesi"
                                             href="/projeler/{{ilan.proje_id}}">İlanın ait olduğu proje:
                                             {{ilan.ilan_projesi}}</a></h5>
-                                    <h4 class="card-title mt-0 "><a class="text-white"
-                                            herf="#">{{ilan.ilan_basligi}}</a>
+                                    <h4 data-bs-toggle="modal" data-bs-target="#{{ilan.id}}" class="card-title mt-0 "><a
+                                            class="text-white" herf="#">{{ilan.ilan_basligi}}</a>
                                     </h4>
                                     <small><i class="far fa-clock"></i> {{ilan.ilan_tarihi}}</small>
                                 </div>

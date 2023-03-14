@@ -1,30 +1,27 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  font-weight: bold;
-}
-
-.form-row {
-  // background: linear-gradient(90deg, #f99a1d, #1e1e1d, #1d1c1c, #f43d38);
-  // background-size: 400% 400%;
-  // animation: gradient 10s ease infinite;
+  background: linear-gradient(90deg, #F99A1D, #1e1e1d, #1d1c1c, #F43D38);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
 }
 
 .super-wrapper-proje-ekle {
-  margin-top: 200px;
+  margin-top: 80px;
+}
+
+.card-header {
+
+  background-color:#1d1c1b;
+
 }
 
 .proje-ekle-img {
   object-fit: cover;
-
 }
-
 .section-contact {
   background-color: whitesmoke;
   padding: 30px;
@@ -55,6 +52,7 @@ body {
 
 label {
   color: #f99a1d;
+  font-weight: 500;
 }
 
 .kvkk-anchor {
@@ -81,19 +79,6 @@ label {
   font-weight: bold;
 }
 
-/* .section-contact .header-section .big-title {
-     position: absolute;
-     bottom: 100%;
-     left: 50%;
-     transform: translate(-50%, 70%);
-     font-size: 120px;
-     font-weight: 700;
-     opacity: 0.15;
-     color: white;
- } */
-
-/* .section-contact .form-contact {} */
-
 .section-contact .form-contact .single-input {
   position: relative;
   margin-top: 40px;
@@ -115,7 +100,7 @@ label {
   padding-left: 50px;
   padding-bottom: 15px;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .section-contact .form-contact .single-input input::placeholder,
@@ -128,18 +113,18 @@ label {
   min-height: 50px;
 }
 
-.section-contact .form-contact .form-check .form-check-input {
+ .form-check-input {
   height: 20px;
-  width: 20px;
+  width: 30px;
 }
 
-.section-contact .form-contact .form-check .form-check-input:checked {
+ .form-check-input:checked {
   background-color: #f43d38;
   border: none;
   box-shadow: none;
 }
 
-.section-contact .form-contact .form-check .form-check-input:not(:checked) {
+.form-check-input:not(:checked) {
   border: none;
   box-shadow: none;
   background-color: #f99a1d;
@@ -162,9 +147,7 @@ fbmit-btn {
 #submit-btn:hover {
   background-color: #f43d38;
   color: white;
-  box-shadow: 0px 9px 10px -2px rgba(255, 255, 255, 0.55);
-  -webkit-box-shadow: 0px 9px 10px -2px rgba(255, 255, 255, 0.55);
-  -moz-box-shadow: 0px 9px 10px -2px rgba(255, 255, 255, 0.55);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 
 .fa-hand-point-right,
@@ -238,3 +221,242 @@ fbmit-btn {
     background-position: 0% 50%;
   }
 }
+
+.scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: -15px;
+  z-index: 99999;
+  background: black;
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  transition: all 0.4s;
+  color: white;
+  text-decoration: none;
+}
+
+.scroll-top i {
+  font-size: 24px;
+  color: #ffffff;
+  line-height: 0;
+}
+
+.scroll-top:hover {
+  background: #f43d38;
+  color: #fff;
+}
+
+.scroll-top.active {
+  visibility: visible;
+  opacity: 1;
+  bottom: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#add {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#add-members-info {
+  color: #f99a1d;
+}
+
+#add:hover {
+  background-color: #44a047;
+}
+
+.remove {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  padding: 10px;
+}
+
+.remove:hover {
+  background-color: #d33f2f;
+}
+
+.remove:active {
+  transform: translateY(2px);
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  border: 1px solid #f99a1d;
+  text-indent: 10px;
+  padding: 20px;
+}
+
+
+tr {
+  transition: background-color 0.2s ease-in-out;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+
+$cyan: #f99a1d;
+$dark: #ffffff;
+$borderW: 2px;
+
+.buttons {
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 30px;
+}
+
+
+#editor {
+
+  height: 300px;
+
+
+}
+
+
+.blob-btn {
+  $numOfBlobs: 4;
+  z-index: 1;
+  position: relative;
+  padding: 20px 46px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: $cyan;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: color 0.5s;
+  cursor: pointer;
+  border-radius: 30px;
+
+  &:before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: $borderW solid $cyan;
+    border-radius: 30px;
+  }
+
+  &:after {
+    content: "";
+    z-index: -2;
+    position: absolute;
+    left: $borderW * 1.5;
+    top: $borderW * 1.5;
+    width: 100%;
+    height: 100%;
+
+    transition: all 0.3s 0.2s;
+    border-radius: 30px;
+  }
+
+  &:hover {
+    color: $dark;
+    border-radius: 30px;
+
+    &:after {
+      transition: all 0.3s;
+      left: 0;
+      top: 0;
+      border-radius: 30px;
+    }
+  }
+
+  &__inner {
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    background: #ffffff;
+  }
+
+  // additional container created, because in FF blobs are breaking overflow:hidden of element with svg gooey filter
+  &__blobs {
+    position: relative;
+    display: block;
+    height: 100%;
+    filter: url("#goo");
+  }
+
+  &__blob {
+    position: absolute;
+    top: $borderW;
+    width: calc(100% / $numOfBlobs);
+    height: 100%;
+    background: $cyan;
+    border-radius: 100%;
+    transform: translate3d(0, 150%, 0) scale(1.7);
+    transition: transform 0.45s;
+
+    @supports (filter: url("#goo")) {
+      transform: translate3d(0, 150%, 0) scale(1.4);
+    }
+
+    @for $i from 1 through $numOfBlobs {
+      &:nth-child(#{$i}) {
+        left: ($i - 1) * calc(100% / $numOfBlobs);
+        transition-delay: ($i - 1) * 0.08s;
+      }
+    }
+
+    .blob-btn:hover & {
+      transform: translateZ(0) scale(1.7);
+
+      @supports (filter: url("#goo")) {
+        transform: translateZ(0) scale(1.4);
+      }
+    }
+  }
+}
+

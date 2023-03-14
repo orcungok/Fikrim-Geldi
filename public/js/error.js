@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+  "use strict";
+
   var body = document.body;
   setInterval(createStar, 100);
   function createStar() {

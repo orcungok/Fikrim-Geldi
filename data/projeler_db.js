@@ -1,5 +1,4 @@
 const mySql = require("mysql2");
-
 const config = require("../config_db");
 const connection_projeler = mySql.createPool(config.db_projeler);
 

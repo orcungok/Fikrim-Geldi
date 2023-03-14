@@ -1,3 +1,8 @@
+const { JSDOM } = require("jsdom");
+const createDOMPurify = require("dompurify");
+const { window } = new JSDOM("");
+const DOMPurify = createDOMPurify(window);
+
 const projeler_db = require("../data/projeler_db");
 const takim_arkadasi_ilanlari_db = require("../data/takim_arkadasi_ilanlari_db");
 
@@ -9,6 +14,24 @@ exports.getAdminPanelData = async (req, res) => {
       let sql1 = "SELECT * FROM proje_detaylari";
       const allDB1 = await projeler_db.query(sql1);
       const projeler = allDB1[0];
+
+      projeler.forEach((proje) => {
+
+        // Sanitize the HTML content using DOMPurify with the 'html' profile.
+        let cleanHTMLAciklama = DOMPurify.sanitize(proje.proje_aciklamasi, {
+          USE_PROFILES: { html: true },
+        });
+        //console.log(cleanHTML) ;
+
+        const today = proje.proje_eklenme_tarihi;
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, "0");
+        const day = today.getDate().toString().padStart(2, "0");
+        const formattedDate = `${year}-${month}-${day}`; //yyyy-mm-dd
+
+        proje.proje_eklenme_tarihi = formattedDate;
+        proje.proje_aciklamasi = cleanHTMLAciklama;
+      });
 
       let sql2 = "SELECT * FROM ta_ilanlari";
       const allDB2 = await takim_arkadasi_ilanlari_db.query(sql2);
@@ -25,25 +48,43 @@ exports.getAdminPanelData = async (req, res) => {
     }
   } catch (error) {
     res
-    .status(401)
-    .send("<h1>Üzgünüz, bir hata oluştu. Lütfen daha sonra tekrar deneyiniz</h1>");
+      .status(401)
+      .send(
+        "<h1>Üzgünüz, bir hata oluştu. Lütfen daha sonra tekrar deneyiniz</h1>"
+      );
     console.log(error);
   }
 };
 
 exports.postFromAdminPanel = async (req, res) => {
   try {
-    //console.log(req.body) ;
+    console.log(req.body);
 
     if (Object.keys(req.body).includes("project_name")) {
       let form = req.body;
       //console.log(form)
 
-      let queryProjeler =
-        "INSERT INTO `projeler`.`proje_detaylari_admin` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_takim_uyeleri`, `proje_kategorisi`, `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`cito_adayi`,`proje_eklenme_tarihi`)" +
-        `VALUES ('${form.user_id}','${form.project_owner_email}','${form.project_owner_name}','${form.project_name}','${form.project_team_members}','${form.project_category}', '${form.project_explanation}','${form.project_image}','${form.project_file}','${form.project_cito}','${form.project_date}');`;
+      let member_string = form.project_team_members;
+      let member_array = member_string.split(",");
 
-      let proje = await projeler_db.query(queryProjeler);
+      let member_duty_string = form.project_team_members_duty;
+      let member_duty_array = member_duty_string.split(",");
+
+      let query =
+        "INSERT INTO `projeler`.`proje_detaylari_admin` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
+        `VALUES (${form.user_id},'${form.project_owner_email}','${
+          form.project_owner_name
+        }','${form.project_name}','${form.project_subject}','${
+          form.project_category
+        }','${form.project_sponsor}','${JSON.stringify(
+          member_array
+        )}','${JSON.stringify(member_duty_array)}','${
+          form.project_explanation
+        }','${form.project_image}','${form.project_file}','${
+          form.project_date
+        }');`;
+
+      let proje = await projeler_db.query(query);
 
       let deleteSql = `DELETE FROM proje_detaylari WHERE id= '${form.project_id}'`;
       let result = await projeler_db.query(deleteSql);

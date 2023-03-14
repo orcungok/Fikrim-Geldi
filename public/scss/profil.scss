@@ -14,6 +14,12 @@ body {
   padding: 0;
 }
 
+.main-navbar {
+
+  font-weight: bold;
+
+}
+
 .icon-box.medium {
   font-size: 20px;
   width: 50px;
@@ -160,4 +166,60 @@ p {
 }
 #kullanıcı-modül-bilgileri {
   margin-top: 100px;
+}
+.section-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.section-toggle:hover {
+  background-color: #f99a1d;
+  color: #fff;
+}
+
+.toggle-label {
+  flex: 1;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.collapsed .toggle-icon {
+  transform: rotate(180deg);
+}
+
+
+ .nav-pills .nav-item button {
+
+
+    font-weight: 600;
+
+    &:hover {
+      color: #f99a1d;
+      
+    }
+
+
+
+
+ }
+
+ .nav-pills .nav-item .active {
+
+  background-color: #f99a1d !important;
+  color: white !important;
+  font-weight: 600;
+
 }
