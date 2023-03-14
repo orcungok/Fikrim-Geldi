@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js ",
+    "install": "npm install",
     "dev": "nodemon app.js",
-    "sass:compile": "sass --watch --no-source-map public/scss/proje_kutuphanesi.scss public/css/proje_kutuphanesi.css"
+    "build": "sass --watch --no-source-map public/scss/proje_kutuphanesi.scss public/css/proje_kutuphanesi.css"
   },
   "keywords": [],
   "author": "Orçun Gök",
