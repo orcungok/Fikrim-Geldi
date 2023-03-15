@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const db_fg = require("../data/db_fg");
 const nodemailer = require("nodemailer");
-const validator = require("email-validator") ;
+const validator = require("deep-email-validator") ;
 const randToken = require("rand-token");
 const { token } = require("morgan");
 
@@ -69,7 +69,9 @@ exports.register = async (req, res) => {
 
     const isEmailValid = await validator.validate(email); //true or false
 
-    if (isEmailValid)
+      
+
+    if (isEmailValid["valid"])
       return res.render("kayıt_ol", {
         msg: "Lütfen geçerli bir e-mail adresi giriniz.",
         msg_type: "error",
