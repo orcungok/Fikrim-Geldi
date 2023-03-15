@@ -71,7 +71,7 @@ exports.register = async (req, res) => {
 
       
 
-    if (isEmailValid["valid"])
+    if (!isEmailValid["valid"])
       return res.render("kayıt_ol", {
         msg: "Lütfen geçerli bir e-mail adresi giriniz.",
         msg_type: "error",
