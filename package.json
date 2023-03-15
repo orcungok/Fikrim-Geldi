@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js ",
     "dev": "nodemon app.js",
-    "sass": "sass --no-source-map public/scss/proje_kutuphanesi.scss public/css/proje_kutuphanesi.css",
+    "sass": "sass --no-source-map public/scss/proje_ekle.scss public/css/proje_ekle.css",
     "build": "npm run sass"
   },
   "keywords": [],
