@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const db_fg = require("../data/db_fg");
 const nodemailer = require("nodemailer");
-const validator = require("deep-email-validator") ;
+const validator = require("isemail") ;
 const randToken = require("rand-token");
 const { token } = require("morgan");
 
@@ -67,11 +67,14 @@ exports.register = async (req, res) => {
         msg_type: "error",
       });
 
-    const isEmailValid = await validator.validate(email); //true or false
 
+
+
+    const isEmailValid = validator.isEmail(email,{errorLevel: true}); //=> true
+    // console.log(isEmailValid) ;
       
 
-    if (!(isEmailValid["valid"]))
+    if (isEmailValid>0)
       return res.render("kayıt_ol", {
         msg: "Lütfen geçerli bir e-mail adresi giriniz.",
         msg_type: "error",
@@ -108,12 +111,16 @@ exports.register = async (req, res) => {
       if (error) console.log(error);
       else {
         console.log("Email sent: " + info.response);
-        return res.render("kayıt_ol", {
-          msg: "Başarıyla kaydoldunuz. Artık sisteme giriş yapabilirsiniz",
-          msg_type: "good",
-        });
       }
     });
+
+
+    return res.render("kayıt_ol", {
+      msg: "Başarıyla kaydoldunuz. Artık sisteme giriş yapabilirsiniz",
+      msg_type: "good",
+    });
+
+
   } catch (error) {
     console.log(error);
   }

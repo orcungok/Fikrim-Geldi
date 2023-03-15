@@ -2,6 +2,7 @@ const projeler_db = require("../data/db_fg");
 const { JSDOM } = require("jsdom");
 
 
+
 exports.getAdminApprovedProjects = async (req, res) => {
   try {
     if (req.user) {
@@ -205,6 +206,7 @@ exports.getProjectBlog = async (req, res) => {
       let proje_id = req.params.proje_id;
       let user_email = req.user.EMAIL;
       let user_id = req.user.ID;
+
 
       const allDb = await projeler_db.query(
         `select * from proje_detaylari_admin where id='${proje_id}'`
