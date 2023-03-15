@@ -69,9 +69,7 @@ exports.register = async (req, res) => {
 
     const isEmailValid = await validator.validate(email); //true or false
 
-    // console.log(isEmailValid) ;
-
-    if (!isEmailValid)
+    if (isEmailValid)
       return res.render("kayıt_ol", {
         msg: "Lütfen geçerli bir e-mail adresi giriniz.",
         msg_type: "error",
