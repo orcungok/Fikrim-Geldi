@@ -282,8 +282,8 @@ exports.add_projects_ap = async (req, res) => {
       let surname = req.user.SURNAME;
       let fullName = name + " " + surname;
 
-      // console.log(req.file) ;
-      // console.log(req.file.originalname) ;
+      console.log(req.file) ;
+      console.log(req.file.originalname) ;
 
 
       const encodedFileName = req.file.originalname;
