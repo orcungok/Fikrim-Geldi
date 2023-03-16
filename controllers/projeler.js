@@ -292,6 +292,10 @@ exports.add_projects_ap = async (req, res) => {
       const day = today.getDate().toString().padStart(2, "0");
       const formattedDate = `${year}-${month}-${day}`; //yyyy-mm-dd
 
+
+
+
+
       //console.log(formattedDate) ;
 
       let query =

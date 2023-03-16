@@ -80,8 +80,8 @@ exports.postFromAdminPanel = async (req, res) => {
         }','${form.project_name}','${form.project_subject}','${
           form.project_category
         }','${form.project_sponsor}','${(
-          member_array
-        )}','${(member_duty_array)}','${
+          JSON.stringify(member_array)
+        )}','${JSON.stringify(member_duty_array)}','${
           form.project_explanation
         }','${form.project_image}','${form.project_file}','${
           form.project_date
