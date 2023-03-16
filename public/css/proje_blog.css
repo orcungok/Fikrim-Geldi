@@ -5,9 +5,7 @@ body {
 }
 
 .main-navbar {
-
   font-weight: bold;
-
 }
 
 .project-item-wrapper {
@@ -74,5 +72,22 @@ a:hover {
 }
 .darkmode--activated img {
   filter: invert(1);
+}
 
-  }
+.back-btn {
+  background-color: #f99a1d;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: .4s ease;
+}
+.back-btn:hover {
+
+  background-color: #f43d38;
+  color: white;
+  transform: scale(1.1);
+
+}

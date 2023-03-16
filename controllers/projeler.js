@@ -1,8 +1,6 @@
 const projeler_db = require("../data/db_fg");
 const { JSDOM } = require("jsdom");
 
-
-
 exports.getAdminApprovedProjects = async (req, res) => {
   try {
     if (req.user) {
@@ -150,7 +148,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
         } else {
           let formattedProjeler = projectFormatter(projeler);
           let urlStringSortBy = `?siralama=`;
-          let urlStringRange = `?aralik=` ;
+          let urlStringRange = `?aralik=`;
 
           return res.render("proje_kütüphanesi", {
             projeler: formattedProjeler,
@@ -158,10 +156,10 @@ exports.getAdminApprovedProjects = async (req, res) => {
             length,
             email,
             user_id,
-            urlStringSortBy,urlStringRange
+            urlStringSortBy,
+            urlStringRange,
           });
         }
-        ;
       } else {
         //kütüphanede proje mevcut değilse sadece kullanıcı bilgilerini gönder.
         let user_id = req.user.ID;
@@ -207,7 +205,6 @@ exports.getProjectBlog = async (req, res) => {
       let user_email = req.user.EMAIL;
       let user_id = req.user.ID;
 
-
       const allDb = await projeler_db.query(
         `select * from proje_detaylari_admin where id='${proje_id}'`
       );
@@ -239,12 +236,10 @@ exports.getProjectBlog = async (req, res) => {
           const formattedDate = date.toLocaleDateString("tr-TR", options);
           proje.proje_eklenme_tarihi = formattedDate;
 
-
-         proje.proje_takim_uyeleri = JSON.parse(proje.proje_takim_uyeleri) ;
-         proje.proje_takim_uyeleri_gorevleri = JSON.parse(proje.proje_takim_uyeleri_gorevleri) ;
-
-
-
+          proje.proje_takim_uyeleri = JSON.parse(proje.proje_takim_uyeleri);
+          proje.proje_takim_uyeleri_gorevleri = JSON.parse(
+            proje.proje_takim_uyeleri_gorevleri
+          );
         });
 
         const proje = await projeler_db.query(
@@ -292,23 +287,11 @@ exports.add_projects_ap = async (req, res) => {
       const day = today.getDate().toString().padStart(2, "0");
       const formattedDate = `${year}-${month}-${day}`; //yyyy-mm-dd
 
-
-
-
-
       //console.log(formattedDate) ;
 
       let query =
         "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
-        `VALUES (${user_id},'${email}','${fullName}','${form.project_name}','${
-          form.project_subject
-        }','${form.project_category}','${
-          form.project_sponsor
-        }','${(form.project_team_members)}','${(
-          form.project_team_members_duty
-        )}','${form.project_explanation}','${form.project_image}','${
-          form.project_file
-        }','${formattedDate}');`;
+        `VALUES (${user_id},'${email}','${fullName}','${form.project_name}','${form.project_subject}','${form.project_category}','${form.project_sponsor}','${form.project_team_members}','${form.project_team_members_duty}','${form.project_explanation}','${form.project_image}','${form.project_file}','${formattedDate}');`;
 
       let result = await projeler_db.query(query);
 
@@ -321,4 +304,3 @@ exports.add_projects_ap = async (req, res) => {
     console.log(err);
   }
 };
-
