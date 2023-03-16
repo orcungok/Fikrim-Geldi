@@ -5,7 +5,7 @@ const iconv = require('iconv-lite');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "C:/Users/orcun/OneDrive/Masaüstü/fikrim-geldi-v1.9-production/public/images/randomForLibrary"); // Dosyanın yükleneceği klasörü belirleyin.
+    cb(null, "C:/Users/orcun/OneDrive/Masaüstü/fikrim-geldi-v1.9-production/public/images/project_images"); // Dosyanın yükleneceği klasörü belirleyin.
   },
   filename: function (req, file, cb) {
 
