@@ -4,8 +4,6 @@ const dotenv = require("dotenv");
 const path = require("path");
 const hbs = require("hbs");
 const cookieParser = require("cookie-parser");
-const multer = require("multer");
-
 app.use(express.urlencoded({ extended: false }));
 
 dotenv.config({

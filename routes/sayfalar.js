@@ -74,7 +74,6 @@ router.post(
 
 router.get("/proje_ekle", userController.isLoggedIn, (req, res) => {
   let user_id = req.user.ID;
-
   res.render("proje_ekle", { user_id });
 });
 

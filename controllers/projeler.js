@@ -1,4 +1,4 @@
-const projeler_db = require("../data/db_fg");
+const db_fg = require("../data/db_fg");
 const { JSDOM } = require("jsdom");
 const iconv = require('iconv-lite');
 
@@ -8,7 +8,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
       //kullanıcı giriş yapmışsa
       let user_id = req.user.ID;
       let sqlMain = "SELECT * FROM proje_detaylari_admin";
-      const allDB = await projeler_db.query(sqlMain);
+      const allDB = await db_fg.query(sqlMain);
       const projeler = allDB[0]; //veritabanındaki projeleri ata
       let length = projeler.length;
       let email = req.user.EMAIL;
@@ -71,7 +71,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
             sql += `AND YEAR(proje_eklenme_tarihi) = YEAR(NOW());`;
           }
 
-          const [rawProjectData, attributes] = await projeler_db.execute(sql);
+          const [rawProjectData, attributes] = await db_fg.execute(sql);
           const length = rawProjectData.length;
           // console.log(sql);
           // console.log(rawProjectData);
@@ -103,7 +103,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
             sql += ` ORDER BY ${sortBy} DESC`;
           }
 
-          const [rawProjectData, attributes] = await projeler_db.execute(sql);
+          const [rawProjectData, attributes] = await db_fg.execute(sql);
           const length = rawProjectData.length;
 
           let projeler = projectFormatter(rawProjectData);
@@ -132,7 +132,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
             sql += ` WHERE YEAR(proje_eklenme_tarihi) = YEAR(NOW());`;
           }
 
-          const [rawProjectData, attributes] = await projeler_db.execute(sql);
+          const [rawProjectData, attributes] = await db_fg.execute(sql);
           const length = rawProjectData.length;
 
           let projeler = projectFormatter(rawProjectData);
@@ -187,7 +187,7 @@ exports.projects_search = async (req, res) => {
           LIMIT 10
           `;
 
-      const data = await projeler_db.query(query);
+      const data = await db_fg.query(query);
       //console.log(data);
 
       res.json(data);
@@ -206,11 +206,11 @@ exports.getProjectBlog = async (req, res) => {
       let user_email = req.user.EMAIL;
       let user_id = req.user.ID;
 
-      const allDb = await projeler_db.query(
+      const allDb = await db_fg.query(
         `select * from proje_detaylari_admin where id='${proje_id}'`
       );
 
-      const update = await projeler_db.query(
+      const update = await db_fg.query(
         `update proje_detaylari_admin set proje_goruntulenme_sayisi=proje_goruntulenme_sayisi+1 where id='${proje_id}'`
       );
 
@@ -243,7 +243,7 @@ exports.getProjectBlog = async (req, res) => {
           );
         });
 
-        const proje = await projeler_db.query(
+        const proje = await db_fg.query(
           `select * from proje_detaylari_admin where email=?`,
           [unique_proje[0].email]
         ); //proje iki elemanlı uzun bir dizi , proje[0] içinde tek bir obje olan bir dizi , proje[0][0] objenin kendisi
@@ -289,6 +289,8 @@ exports.add_projects_ap = async (req, res) => {
       // const encodedFileName = req.file.originalname;
       // const decodedFileName = iconv.decode(Buffer.from(encodedFileName, "binary"), "utf-8");
 
+      console.log(req.body)
+
 
       const today = new Date();
       const year = today.getFullYear();
@@ -302,7 +304,7 @@ exports.add_projects_ap = async (req, res) => {
         "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
         `VALUES (${user_id},'${email}','${fullName}','${form.project_name}','${form.project_subject}','${form.project_category}','${form.project_sponsor}','${form.project_team_members}','${form.project_team_members_duty}','${form.project_explanation}','${form.project_image}','${form.project_file}','${formattedDate}');`;
 
-      let result = await projeler_db.query(query);
+      let result = await db_fg.query(query);
 
       res.status(202).render("tebrikler", { form });
     } else {
