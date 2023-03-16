@@ -295,7 +295,7 @@ exports.add_projects_ap = async (req, res) => {
       //console.log(formattedDate) ;
 
       let query =
-        "INSERT INTO `projeler`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
+        "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
         `VALUES (${user_id},'${email}','${fullName}','${form.project_name}','${
           form.project_subject
         }','${form.project_category}','${
