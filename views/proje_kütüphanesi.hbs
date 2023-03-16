@@ -30,8 +30,7 @@
   <link rel="stylesheet" href="../css/proje_kutuphanesi.css" type="text/css">
   <link rel="stylesheet" href="/css/custom-sheets/scrollbar.css">
 
-  {{!--
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> --}}
+
 
 
 </head>
@@ -48,7 +47,7 @@
 
   <div class="library-super-wrapper">
 
-    <section id="#proje-sergisi" class="overflow-hidden">
+    <section id="#proje-sergisi" class="overflow-hidden animate__animated animate__fadeIn">
 
 
       <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -83,7 +82,7 @@
           {{#each randomProjeler as |proje|}}
 
           <div class="carousel-item c-item">
-            <img src="https://fikrim-geldi.onrender.com/images/randomForLibrary/{{proje.proje_resmi_url}}" class="d-block w-100 c-img" alt="Slide 2">
+            <img src="../images/randomForLibrary/{{proje.proje_resmi_url}}" class="d-block w-100 c-img" alt="Slide 2">
             <div class="carousel-caption d-flex flex-column justify-content-center">
               <a title="Projeyi Görüntüleyin"
                 class="proje-nav display-4 fw-bolder animate__animated animate__backInDown"
@@ -300,7 +299,7 @@
 
               <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card text-white card-has-bg wow bounceInLeft"
-                  style="background-image:url('https://fikrim-geldi.onrender.com/images/randomForLibrary/{{proje.proje_resmi_url}}'); background-size: cover;">
+                  style="background-image:url('../images/randomForLibrary/{{proje.proje_resmi_url}}'); background-size: cover;">
                   <img class="card-img d-none" src="../images/randomForLibrary/{{proje.proje_resmi_url}}">
                   <div class="card-img-overlay d-flex flex-column">
 
@@ -438,9 +437,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 
-  {{!--
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> --}}
-
 
   <script src="../js/wow.js"></script>
   <script>
@@ -457,11 +453,6 @@
 
   <script src="../js/proje_kütüphanesi.js"></script>
 
-
-  {{!--
-  <script>
-    AOS.init();
-  </script> --}}
 
 </body>
 

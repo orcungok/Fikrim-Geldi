@@ -1,5 +1,6 @@
 const projeler_db = require("../data/db_fg");
 const { JSDOM } = require("jsdom");
+const iconv = require('iconv-lite');
 
 exports.getAdminApprovedProjects = async (req, res) => {
   try {
@@ -281,6 +282,14 @@ exports.add_projects_ap = async (req, res) => {
       let surname = req.user.SURNAME;
       let fullName = name + " " + surname;
 
+      // console.log(req.file) ;
+      // console.log(req.file.originalname) ;
+
+
+      const encodedFileName = req.file.originalname;
+      const decodedFileName = iconv.decode(Buffer.from(encodedFileName, "binary"), "utf-8");
+
+
       const today = new Date();
       const year = today.getFullYear();
       const month = (today.getMonth() + 1).toString().padStart(2, "0");
@@ -291,7 +300,7 @@ exports.add_projects_ap = async (req, res) => {
 
       let query =
         "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
-        `VALUES (${user_id},'${email}','${fullName}','${form.project_name}','${form.project_subject}','${form.project_category}','${form.project_sponsor}','${form.project_team_members}','${form.project_team_members_duty}','${form.project_explanation}','${form.project_image}','${form.project_file}','${formattedDate}');`;
+        `VALUES (${user_id},'${email}','${fullName}','${form.project_name}','${form.project_subject}','${form.project_category}','${form.project_sponsor}','${form.project_team_members}','${form.project_team_members_duty}','${form.project_explanation}','${decodedFileName}','${form.project_file}','${formattedDate}');`;
 
       let result = await projeler_db.query(query);
 

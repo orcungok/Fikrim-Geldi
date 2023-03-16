@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
+
 const userController = require("../controllers/kullanıcılar");
 const projectController = require("../controllers/projeler");
 const profileController = require("../controllers/profil_controller");
 // const teamMateAnnController = require("../controllers/takim_arkadasi_ilanlari");
 const adminPanelController = require("../controllers/admin_panel");
+const fileUploadController = require("../controllers/fileUpload") ;
 
 router.get(["/", "/giris_yap"], (req, res) => {
   res.render("giriş_yap");
@@ -65,6 +67,7 @@ router.get("/projeler", userController.isLoggedIn, (req, res) => {
 router.post(
   "/proje_ekle",
   userController.isLoggedIn,
+  fileUploadController.single('project_image'),
   projectController.add_projects_ap,
   (req, res) => {}
 );

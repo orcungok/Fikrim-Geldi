@@ -61,7 +61,7 @@ exports.getAdminPanelData = async (req, res) => {
 
 exports.postFromAdminPanel = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
 
     if (Object.keys(req.body).includes("project_name")) {
       let form = req.body;
