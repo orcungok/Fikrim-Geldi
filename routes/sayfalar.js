@@ -67,7 +67,7 @@ router.get("/projeler", userController.isLoggedIn, (req, res) => {
 router.post(
   "/proje_ekle",
   userController.isLoggedIn,
-  fileUploadController.single('project_image'),
+  // fileUploadController.single('project_image'),
   projectController.add_projects_ap,
   (req, res) => {}
 );
