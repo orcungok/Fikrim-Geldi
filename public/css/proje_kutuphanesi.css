@@ -40,6 +40,9 @@ body {
     min-height: 450px;
   }
 }
+.card .card-footer {
+  background-color: transparent;
+}
 .card .card-meta a {
   color: #f99a1d;
   font-weight: bold;

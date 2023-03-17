@@ -1,58 +1,55 @@
 const db_fg = require("../data/db_fg");
 const { JSDOM } = require("jsdom");
-const iconv = require("iconv-lite");
-const path = require("path");
+// const iconv = require("iconv-lite");
 
 exports.getAdminApprovedProjects = async (req, res) => {
   try {
     if (req.user) {
-      //kullanıcı giriş yapmışsa
-      let user_id = req.user.ID;
-      let sqlMain = "SELECT * FROM proje_detaylari_admin";
-      const allDB = await db_fg.query(sqlMain);
-
-
-      const projeler = allDB[0]; //veritabanındaki projeleri ata
-      // console.log(projeler);
-      let length = projeler.length;
-      let email = req.user.EMAIL;
-
+      const sqlMain = "SELECT * FROM proje_detaylari_admin";
+      const [allDB] = await db_fg.query(sqlMain);
+      const projeler = allDB || []; // veritabanındaki projeleri ata veya boş dizi olarak ata
+      const length = projeler.length;
+      const email = req.user.EMAIL;
+      let user_id = req?.user?.ID; // Check if the req object has a 'user' property and if it does, get its 'ID' property
+      if (!user_id) throw new Error("Kullanıcı ID'si bulunamadı");
       if (projeler.length > 0) {
         //veritabanında proje mevcutsa
-        const filters = req.query; //
-        const category = filters.proje_kategorisi; // kss, hizmet, üretim , arge
-        const sortBy = filters.siralama; // en çok goruntulenen, en cok begenilen ...
-        const range = filters.aralik; // bugün , bu hafta , bu ay , bu yıl
+        const {
+          proje_kategorisi: category,
+          siralama: sortBy,
+          aralik: range,
+        } = req.query;
 
         const pickProjects = (projeler) => {
-          if (projeler.length > 0) {
-            let pickedProjects = [];
-            while (pickedProjects.length < 3) {
-              let randomIndex = Math.floor(Math.random() * projeler.length);
-              let randomProject = projeler[randomIndex];
-              if (!pickedProjects.includes(randomProject)) {
-                pickedProjects.push(randomProject);
-              }
-            }
-            return pickedProjects;
+          const pickedProjects = [],
+            remainingProjects = [...projeler];
+
+          while (pickedProjects.length < Math.min(3, projeler.length)) {
+            const randomIndex = Math.floor(
+              Math.random() * remainingProjects.length
+            );
+            const randomProject = remainingProjects.splice(randomIndex, 1)[0];
+            pickedProjects.push(randomProject);
           }
+
+          return pickedProjects;
         };
+
         let randomProjeler = pickProjects(projeler);
 
         const projectFormatter = (projeler) => {
-          //veritabanından gelen işlenmemiş bazı proje verilerini işler. Örneğin tarih vb.
-          projeler.forEach((proje, index) => {
+          // formats unprocessed project data from the database such as date info etc.
+          return projeler.map((proje) => {
             const dateString = proje.proje_eklenme_tarihi;
             const date = new Date(dateString);
 
             const options = { day: "numeric", month: "long", year: "numeric" };
             const formattedDate = date.toLocaleDateString("tr-TR", options);
-            proje.proje_eklenme_tarihi = formattedDate;
+            return { ...proje, proje_eklenme_tarihi: formattedDate };
           });
-
-          return projeler;
         };
 
+        //filtreleme başlangıç -------------------------------------
         if (category) {
           let rangeRemover = "";
           let sql = `SELECT * FROM proje_detaylari_admin WHERE proje_kategorisi='${category}'`;
@@ -77,7 +74,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
             sql += `AND YEAR(proje_eklenme_tarihi) = YEAR(NOW());`;
           }
 
-          const [rawProjectData, attributes] = await db_fg.execute(sql);
+          const [rawProjectData] = await db_fg.execute(sql);
           const length = rawProjectData.length;
           // console.log(sql);
           // console.log(rawProjectData);
@@ -167,11 +164,12 @@ exports.getAdminApprovedProjects = async (req, res) => {
             urlStringRange,
           });
         }
+
+        //filtreleme bitiş--------------------------------------------
       } else {
         //kütüphanede proje mevcut değilse sadece kullanıcı bilgilerini gönder.
-        let user_id = req.user.ID;
-        let email = req.user.EMAIL;
-        return res.render("proje_kütüphanesi", { email, user_id });
+        const { ID: user_id, EMAIL: email } = req.user;
+        return res.render("proje_kütüphanesi", {email, user_id , msgNoProjects:'Maalesef henüz kütüphaneye hiçbir proje eklenmemiş.'});
       }
     } else {
       res.status(401).redirect("/");
@@ -287,20 +285,26 @@ exports.add_projects_ap = async (req, res) => {
         SURNAME: surname,
       } = req.user;
 
-      const form = req.body ; 
+      const form = req.body;
 
       const fullName = `${name} ${surname}`;
 
       const { originalname: fileName } = req.file;
+      const buffer = Buffer.from(fileName, "latin1"); // Convert from latin1 to utf-8
+      const decodedFileName = buffer.toString("utf-8");
+
+      console.log(decodedFileName);
+
       const filePath = `/images/project_images/${req.file.filename.replace(
         /\\/g,
         "/"
       )}`;
 
       const today = new Date();
-      const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-        
-      
+      const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
+
       const dbQuery =
         "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`, `proje_resmi_isim`,`proje_resmi_path`, `proje_dosyalari_url`,`proje_eklenme_tarihi`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       const queryParams = [
@@ -314,7 +318,7 @@ exports.add_projects_ap = async (req, res) => {
         form.project_team_members,
         form.project_team_members_duty,
         form.project_explanation,
-        fileName,
+        decodedFileName,
         filePath,
         form.project_file,
         formattedDate,

@@ -56,6 +56,11 @@ body {
     min-height: 450px;
   }
 
+  .card-footer {
+    background-color: transparent;
+
+  }
+
   .card-meta a {
     color: $main-orange;
     font-weight: bold;
@@ -167,6 +172,8 @@ body {
   //   );
   // }
 }
+
+
 
 // =======================================PROJECT CARDS END==========================================================
 

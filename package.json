@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js ",
     "dev": "nodemon app.js",
-    "sass": "sass --no-source-map public/scss/proje_ekle.scss public/css/proje_ekle.css",
+    "sass": "sass --no-source-map public/scss/proje_kutuphanesi.scss public/css/proje_kutuphanesi.css",
     "build": "npm run sass"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "bootstrap": "^5.2.3",
     "connect-livereload": "^0.6.1",
     "cookie-parser": "^1.4.6",
