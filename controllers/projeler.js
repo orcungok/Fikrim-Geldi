@@ -169,7 +169,11 @@ exports.getAdminApprovedProjects = async (req, res) => {
       } else {
         //kütüphanede proje mevcut değilse sadece kullanıcı bilgilerini gönder.
         const { ID: user_id, EMAIL: email } = req.user;
-        return res.render("proje_kütüphanesi", {email, user_id , msgNoProjects:'Maalesef henüz kütüphaneye hiçbir proje eklenmemiş.'});
+        return res.render("proje_kütüphanesi", {
+          email,
+          user_id,
+          msgNoProjects: "Maalesef henüz kütüphaneye hiçbir proje eklenmemiş.",
+        });
       }
     } else {
       res.status(401).redirect("/");
@@ -206,56 +210,57 @@ exports.projects_search = async (req, res) => {
 exports.getProjectBlog = async (req, res) => {
   try {
     if (req.user) {
-      let proje_id = req.params.proje_id;
-      let user_email = req.user.EMAIL;
-      let user_id = req.user.ID;
+      const { EMAIL: user_email, ID: user_id } = req.user;
+      const proje_id = req.params.proje_id;
 
-      const allDb = await db_fg.query(
-        `select * from proje_detaylari_admin where id='${proje_id}'`
+      const result = await db_fg.query(
+        "SELECT * FROM proje_detaylari_admin WHERE id=?",
+        [proje_id]
       );
+      let unique_proje = result[0];
 
-      const update = await db_fg.query(
-        `update proje_detaylari_admin set proje_goruntulenme_sayisi=proje_goruntulenme_sayisi+1 where id='${proje_id}'`
+      await db_fg.query(
+        "update proje_detaylari_admin set proje_goruntulenme_sayisi=proje_goruntulenme_sayisi+1 where id=?",
+        [proje_id]
       );
-
-      const unique_proje = allDb[0];
 
       // console.log(unique_proje);
 
       if (unique_proje.length > 0) {
         //Her bir projenin eklenme tarihini okunabilir bir biçime getirmek için formatladım
 
-        unique_proje.forEach((proje) => {
+        unique_proje = unique_proje.map((proje) => {
           const dom = new JSDOM(proje.proje_aciklamasi);
 
           // Render the DOM content on a web page
           const renderedContent = dom.window.document.querySelector(
             ".main-content-explanation"
           ).innerHTML;
-          proje.proje_aciklamasi = renderedContent;
 
           const dateString = proje.proje_eklenme_tarihi;
           const date = new Date(dateString);
-
           const options = { day: "numeric", month: "long", year: "numeric" };
           const formattedDate = date.toLocaleDateString("tr-TR", options);
-          proje.proje_eklenme_tarihi = formattedDate;
-
-          proje.proje_takim_uyeleri = JSON.parse(proje.proje_takim_uyeleri);
-          proje.proje_takim_uyeleri_gorevleri = JSON.parse(
-            proje.proje_takim_uyeleri_gorevleri
-          );
+          return {
+            ...proje,
+            proje_aciklamasi: renderedContent,
+            proje_eklenme_tarihi: formattedDate,
+            proje_takim_uyeleri: JSON.parse(
+              JSON.parse(proje.proje_takim_uyeleri)
+            ),
+            proje_takim_uyeleri_gorevleri: JSON.parse(
+              JSON.parse(proje.proje_takim_uyeleri_gorevleri)
+            ),
+          };
         });
 
         const proje = await db_fg.query(
           `select * from proje_detaylari_admin where email=?`,
           [unique_proje[0].email]
-        ); //proje iki elemanlı uzun bir dizi , proje[0] içinde tek bir obje olan bir dizi , proje[0][0] objenin kendisi
+        );
 
-        let sirket = proje[0][0].COMPANY;
-        let departman = proje[0][0].DEPARTMENT;
-        unique_proje[0].sirket = sirket;
-        unique_proje[0].departman = departman;
+        unique_proje[0].sirket = proje[0][0].COMPANY;
+        unique_proje[0].departman = proje[0][0].DEPARTMENT;
 
         const unique = unique_proje[0];
 
@@ -286,6 +291,7 @@ exports.add_projects_ap = async (req, res) => {
       } = req.user;
 
       const form = req.body;
+      console.log(form);
 
       const fullName = `${name} ${surname}`;
 
@@ -312,8 +318,8 @@ exports.add_projects_ap = async (req, res) => {
         form.project_subject,
         form.project_category,
         form.project_sponsor,
-        form.project_team_members,
-        form.project_team_members_duty,
+        JSON.stringify(form.project_team_members),
+        JSON.stringify(form.project_team_members_duty),
         form.project_explanation,
         decodedFileName,
         filePath,
