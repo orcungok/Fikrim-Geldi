@@ -1,8 +1,7 @@
 const db_fg = require("../data/db_fg");
 const { JSDOM } = require("jsdom");
-const iconv = require('iconv-lite');
-const path = require('path');
-
+const iconv = require("iconv-lite");
+const path = require("path");
 
 exports.getAdminApprovedProjects = async (req, res) => {
   try {
@@ -11,7 +10,10 @@ exports.getAdminApprovedProjects = async (req, res) => {
       let user_id = req.user.ID;
       let sqlMain = "SELECT * FROM proje_detaylari_admin";
       const allDB = await db_fg.query(sqlMain);
+
+
       const projeler = allDB[0]; //veritabanındaki projeleri ata
+      // console.log(projeler);
       let length = projeler.length;
       let email = req.user.EMAIL;
 
@@ -23,21 +25,23 @@ exports.getAdminApprovedProjects = async (req, res) => {
         const range = filters.aralik; // bugün , bu hafta , bu ay , bu yıl
 
         const pickProjects = (projeler) => {
-          let pickedProjects = [];
-          while (pickedProjects.length < 3) {
-            let randomIndex = Math.floor(Math.random() * projeler.length);
-            let randomProject = projeler[randomIndex];
-            if (!pickedProjects.includes(randomProject)) {
-              pickedProjects.push(randomProject);
+          if (projeler.length > 0) {
+            let pickedProjects = [];
+            while (pickedProjects.length < 3) {
+              let randomIndex = Math.floor(Math.random() * projeler.length);
+              let randomProject = projeler[randomIndex];
+              if (!pickedProjects.includes(randomProject)) {
+                pickedProjects.push(randomProject);
+              }
             }
+            return pickedProjects;
           }
-          return pickedProjects;
         };
         let randomProjeler = pickProjects(projeler);
 
         const projectFormatter = (projeler) => {
           //veritabanından gelen işlenmemiş bazı proje verilerini işler. Örneğin tarih vb.
-          projeler.forEach((proje) => {
+          projeler.forEach((proje, index) => {
             const dateString = proje.proje_eklenme_tarihi;
             const date = new Date(dateString);
 
@@ -276,50 +280,46 @@ exports.getProjectBlog = async (req, res) => {
 exports.add_projects_ap = async (req, res) => {
   try {
     if (req.user) {
-      let form = req.body;
-      // console.log(form);
-      let email = req.user.EMAIL;
-      let user_id = req.user.ID;
-      let name = req.user.NAME;
-      let surname = req.user.SURNAME;
-      let fullName = name + " " + surname;
+      const {
+        EMAIL: email,
+        ID: user_id,
+        NAME: name,
+        SURNAME: surname,
+      } = req.user;
 
-      // console.log(req.file) ;
-      // console.log(req.file.originalname) ;
+      const form = req.body ; 
 
+      const fullName = `${name} ${surname}`;
 
-      // const encodedFileName = req.file.originalname;
-      // const decodedFileName = iconv.decode(Buffer.from(encodedFileName, "binary"), "utf-8");
-
-
-      const fileName = req.file.originalname;
-      const filePath = '/images/project_images/' + req.file.filename.replace(/\\/g, '/');
-
-      console.log(filePath);
-
-
-
-
-      
+      const { originalname: fileName } = req.file;
+      const filePath = `/images/project_images/${req.file.filename.replace(
+        /\\/g,
+        "/"
+      )}`;
 
       const today = new Date();
-      const year = today.getFullYear();
-      const month = (today.getMonth() + 1).toString().padStart(2, "0");
-      const day = today.getDate().toString().padStart(2, "0");
-      const formattedDate = `${year}-${month}-${day}`; //yyyy-mm-dd
-
-      //console.log(formattedDate) ;
-
-
-      let queryImages = "INSERT INTO `sql7605562`.`images`(`name`,`path`)" + `VALUES('${fileName}','${filePath}')` ;
-
-
-      let query =
-        "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
-        `VALUES (${user_id},'${email}','${fullName}','${form.project_name}','${form.project_subject}','${form.project_category}','${form.project_sponsor}','${form.project_team_members}','${form.project_team_members_duty}','${form.project_explanation}','${form.project_file}','${formattedDate}');`;
-
-      await db_fg.query(query);
-      await db_fg.query(queryImages) ;
+      const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+        
+      
+      const dbQuery =
+        "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`, `proje_resmi_isim`,`proje_resmi_path`, `proje_dosyalari_url`,`proje_eklenme_tarihi`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      const queryParams = [
+        user_id,
+        email,
+        fullName,
+        form.project_name,
+        form.project_subject,
+        form.project_category,
+        form.project_sponsor,
+        form.project_team_members,
+        form.project_team_members_duty,
+        form.project_explanation,
+        fileName,
+        filePath,
+        form.project_file,
+        formattedDate,
+      ];
+      await db_fg.query(dbQuery, queryParams);
 
       res.status(202).render("tebrikler", { form });
     } else {

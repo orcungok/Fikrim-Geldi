@@ -3,55 +3,40 @@ const createDOMPurify = require("dompurify");
 const { window } = new JSDOM("");
 const DOMPurify = createDOMPurify(window);
 
-const db_fg  = require("../data/db_fg");
-
-
+const db_fg = require("../data/db_fg");
 
 // const takim_arkadasi_ilanlari_db = require("../data/takim_arkadasi_ilanlari_db");
 
 exports.getAdminPanelData = async (req, res) => {
   try {
     if (req.user && req.user.ROLE == "admin") {
-      let user_id = req.user.ID;
-      //console.log(user_id)
-      let sql1 = "SELECT * FROM proje_detaylari";
-      let sql2 = "SELECT * FROM images" ; 
-      const allDB1 = await db_fg.query(sql1);
-      const projeler = allDB1[0];
+      const { ID: user_id } = req.user;
+      let sqlMain = "SELECT * FROM proje_detaylari";
+      const [rawProjeler] = await db_fg.query(sqlMain);
 
+      const sanitizedProjeler = rawProjeler.map(
+        ({ proje_aciklamasi, proje_eklenme_tarihi, ...rest }) => {
+          // Sanitize the HTML content using DOMPurify with the 'html' profile.
+          const cleanHTMLAciklama = DOMPurify.sanitize(proje_aciklamasi, {
+            USE_PROFILES: { html: true },
+          });
 
-      const[images,attributes] = await db_fg.query(sql2) ;
-      console.log(images) ; 
-
-      projeler.forEach((proje,index) => {
-
-          proje.imagePath = images[index] ;
-          console.log(images[index])
-
-        // Sanitize the HTML content using DOMPurify with the 'html' profile.
-        let cleanHTMLAciklama = DOMPurify.sanitize(proje.proje_aciklamasi, {
-          USE_PROFILES: { html: true },
-        });
-        //console.log(cleanHTML) ;
-
-        const today = proje.proje_eklenme_tarihi;
-        const year = today.getFullYear();
-        const month = (today.getMonth() + 1).toString().padStart(2, "0");
-        const day = today.getDate().toString().padStart(2, "0");
-        const formattedDate = `${year}-${month}-${day}`; //yyyy-mm-dd
-
-        proje.proje_eklenme_tarihi = formattedDate;
-        proje.proje_aciklamasi = cleanHTMLAciklama;
-      });
-
-      console.log(projeler) ;
+          const dateObj = new Date(proje_eklenme_tarihi);
+          const formattedDate = dateObj.toISOString().slice(0, 10);
+          // console.log(formattedDate) ;
+          return {
+            ...rest,
+            proje_aciklamasi: cleanHTMLAciklama,
+            proje_eklenme_tarihi: formattedDate,
+          };
+        }
+      );
 
       // let sql2 = "SELECT * FROM ta_ilanlari";
       // const allDB2 = await takim_arkadasi_ilanlari_db.query(sql2);
       // const takim_arkadasi_ilanlari = allDB2[0];
       res.render("dashboard", {
-        projeler: projeler,
-        images : images,
+        projeler: sanitizedProjeler,
         // ilanlar: takim_arkadasi_ilanlari,
         user_id,
       });
@@ -75,44 +60,63 @@ exports.postFromAdminPanel = async (req, res) => {
     // console.log(req.body);
 
     if (Object.keys(req.body).includes("project_name")) {
-      let form = req.body;
-      //console.log(form)
+      const {
+        project_id,
+        user_id,
+        project_owner_email,
+        project_owner_name,
+        project_name,
+        project_subject,
+        project_category,
+        project_sponsor,
+        project_team_members,
+        project_team_members_duty,
+        project_explanation,
+        project_image,
+        project_file,
+        project_date,
+      } = req.body;
 
-      let member_string = form.project_team_members;
-      let member_array = member_string.split(",");
+      console.log(req.body);
 
-      let member_duty_string = form.project_team_members_duty;
-      let member_duty_array = member_duty_string.split(",");
+      const member_array = project_team_members.split(",");
+      const member_duty_array = project_team_members_duty.split(",");
 
-      let query =
-        "INSERT INTO `sql7605562`.`proje_detaylari_admin` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`,`proje_resmi_url`,`proje_dosyalari_url`,`proje_eklenme_tarihi`)" +
-        `VALUES (${form.user_id},'${form.project_owner_email}','${
-          form.project_owner_name
-        }','${form.project_name}','${form.project_subject}','${
-          form.project_category
-        }','${form.project_sponsor}','${(
-          JSON.stringify(member_array)
-        )}','${JSON.stringify(member_duty_array)}','${
-          form.project_explanation
-        }','${form.project_image}','${form.project_file}','${
-          form.project_date
-        }');`;
+      const project_image_path = `/images/project_images/${project_image}`;
 
-      let proje = await db_fg.query(query);
+      const query = `INSERT INTO \`sql7605562\`.\`proje_detaylari_admin\` (\`user_id\`,\`email\`,\`projeyi_ekleyen\`,\`proje_ismi\`,\`proje_konusu\`,\`proje_kategorisi\`,\`proje_sponsoru\`,\`proje_takim_uyeleri\`, \`proje_takim_uyeleri_gorevleri\`,  \`proje_aciklamasi\`,\`proje_resmi_isim\`,\`proje_resmi_path\`, \`proje_dosyalari_url\`,\`proje_eklenme_tarihi\`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      const values = [
+        user_id,
+        project_owner_email,
+        project_owner_name,
+        project_name,
+        project_subject,
+        project_category,
+        project_sponsor,
+        JSON.stringify(member_array),
+        JSON.stringify(member_duty_array),
+        project_explanation,
+        project_image,
+        project_image_path,
+        project_file,
+        project_date,
+      ];
+      await db_fg.query(query, values);
 
-      let deleteSql = `DELETE FROM proje_detaylari WHERE id= '${form.project_id}'`;
-      let result = await db_fg.query(deleteSql);
-    // } else if (Object.keys(req.body).includes("annT_project_name")) {
-    //   let form = req.body;
-    //   //console.log(form);
+      const deleteSql = `DELETE FROM proje_detaylari WHERE id= ?`;
+      await db_fg.query(deleteSql, [project_id]);
+      // const result = await db_fg.query(deleteSql, [projectId]);
+      // } else if (Object.keys(req.body).includes("annT_project_name")) {
+      //   let form = req.body;
+      //   //console.log(form);
 
-    //   // let queryTaİlan =
-    //   //   "INSERT INTO `takim_arkadasi_bul`.`ta_ilanlari_admin` (`user_id`,`email`,`ilani_ekleyen`,`ilan_basligi`,`ilan_aciklamasi`, `ilan_tarihi`, `ilan_projesi`,`ilan_sirketi`)" +
-    //   //   `VALUES ('${form.user_id}','${form.annT_owner_email}','${form.annT_owner_name}','${form.annT_title}','${form.annT_explanation}','${form.annT_date}','${form.annT_project_name}','${form.annT_company_name}');`;
-    //   // let ta_ilan = await takim_arkadasi_ilanlari_db.query(queryTaİlan);
+      //   // let queryTaİlan =
+      //   //   "INSERT INTO `takim_arkadasi_bul`.`ta_ilanlari_admin` (`user_id`,`email`,`ilani_ekleyen`,`ilan_basligi`,`ilan_aciklamasi`, `ilan_tarihi`, `ilan_projesi`,`ilan_sirketi`)" +
+      //   //   `VALUES ('${form.user_id}','${form.annT_owner_email}','${form.annT_owner_name}','${form.annT_title}','${form.annT_explanation}','${form.annT_date}','${form.annT_project_name}','${form.annT_company_name}');`;
+      //   // let ta_ilan = await takim_arkadasi_ilanlari_db.query(queryTaİlan);
 
-    //   // let deleteSql = `DELETE FROM ta_ilanlari WHERE id= '${form.annT_id}'`;
-    //   let result = await takim_arkadasi_ilanlari_db.query(deleteSql);
+      //   // let deleteSql = `DELETE FROM ta_ilanlari WHERE id= '${form.annT_id}'`;
+      //   let result = await takim_arkadasi_ilanlari_db.query(deleteSql);
     }
 
     res.redirect("/anasayfa/admin");
