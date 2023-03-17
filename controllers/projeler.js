@@ -293,7 +293,7 @@ exports.add_projects_ap = async (req, res) => {
 
 
       const fileName = req.file.originalname;
-      const filePath = '/images/' + req.file.filename.replace(/\\/g, '/');
+      const filePath = '/images/project_images/' + req.file.filename.replace(/\\/g, '/');
 
       console.log(filePath);
 

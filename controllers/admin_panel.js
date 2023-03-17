@@ -15,10 +15,18 @@ exports.getAdminPanelData = async (req, res) => {
       let user_id = req.user.ID;
       //console.log(user_id)
       let sql1 = "SELECT * FROM proje_detaylari";
+      let sql2 = "SELECT * FROM images" ; 
       const allDB1 = await db_fg.query(sql1);
       const projeler = allDB1[0];
 
-      projeler.forEach((proje) => {
+
+      const[images,attributes] = await db_fg.query(sql2) ;
+      console.log(images) ; 
+
+      projeler.forEach((proje,index) => {
+
+          proje.imagePath = images[index] ;
+          console.log(images[index])
 
         // Sanitize the HTML content using DOMPurify with the 'html' profile.
         let cleanHTMLAciklama = DOMPurify.sanitize(proje.proje_aciklamasi, {
@@ -36,11 +44,14 @@ exports.getAdminPanelData = async (req, res) => {
         proje.proje_aciklamasi = cleanHTMLAciklama;
       });
 
+      console.log(projeler) ;
+
       // let sql2 = "SELECT * FROM ta_ilanlari";
       // const allDB2 = await takim_arkadasi_ilanlari_db.query(sql2);
       // const takim_arkadasi_ilanlari = allDB2[0];
       res.render("dashboard", {
         projeler: projeler,
+        images : images,
         // ilanlar: takim_arkadasi_ilanlari,
         user_id,
       });
