@@ -293,12 +293,9 @@ exports.add_projects_ap = async (req, res) => {
       const buffer = Buffer.from(fileName, "latin1"); // Convert from latin1 to utf-8
       const decodedFileName = buffer.toString("utf-8");
 
-      console.log(decodedFileName);
+      // console.log(decodedFileName);
 
-      const filePath = `/images/project_images/${req.file.filename.replace(
-        /\\/g,
-        "/"
-      )}`;
+      const filePath = `/images/project_images/${decodedFileName}`;
 
       const today = new Date();
       const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
