@@ -49,82 +49,51 @@
             <div class="card border-0">
 
 
-                <div class="project-navigation border border-2 wow fadeInRightBig">
 
-                    <div class="container-fluid">
-                        <div class="row">
-
-                            <div class="col-6 col-6 p-0">
-
-                                <div class="project-metadata">
-
-                                    <ul>
-
-                                        <li> <span>{{unique.proje_goruntulenme_sayisi}}</span><br>Görüntülenme
-                                        </li>
-                                        <li><span>{{unique.proje_eklenme_tarihi}}</span><br>
-                                            tarihinde
-                                            eklendi</li>
-                                        <li>Ekleyen<br><a style="color:#F43D38"
-                                                href="/profil/{{unique.user_id}}">{{unique.projeyi_ekleyen}}</a>
-                                        </li>
-                                        <li>Kategori<br><span>{{unique.proje_kategorisi}}</span>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="col-6 d-flex justify-content-center align-items-center p-0">
-
-                                <div class="project-data-nav">
-
-                                    <nav>
-
-                                        <ul>
-
-
-                                            <li><a href="#proje-konusu">Proje Konusu</a></li>
-                                            <li><a href="#proje-icerigi">Proje İçeriği</a></li>
-                                            <li><a href="#proje-dosyalari">Proje Dosyaları</a></li>
-
-
-
-                                        </ul>
-
-
-                                    </nav>
-
-
-
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="card-body project-main-content wow fadeInLeftBig">
 
                     <main>
 
-                        <div class="container">
+                        <div class="container-fluid">
+
                             <div class="row">
+                                <div class="project-name-wrapper col-12 text-center">
+
+                                    <h1 id="proje-ismi">{{unique.proje_ismi}}</h1>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="row mt-4">
 
                                 <div class="col-md-5">
 
                                     <div class="project-image-container">
 
-                                        <img class="img-fluid rounded-3"
-                                            src="{{unique.proje_resmi_path}}"
+                                        <img class="img-fluid" src="{{unique.proje_resmi_path}}"
                                             alt="Proje Görseli">
 
+                                    </div>
+
+                                    <div class="project-metadata">
+
+                                        <ul>
+
+                                            <li> <span>{{unique.proje_goruntulenme_sayisi}}</span><br>Görüntülenme
+                                            </li>
+                                            <li><span>{{unique.proje_eklenme_tarihi}}</span><br>
+                                                tarihinde
+                                                eklendi</li>
+                                            <li><a title="Profili Görüntüle" style="color:#f43d38" href="/profil/{{unique.user_id}}">{{unique.projeyi_ekleyen}}</a>
+                                            </li>
+                                            <li><span>{{unique.proje_kategorisi}}</span>
+                                            </li>
+
+
+                                        </ul>
                                     </div>
 
                                     <div class="project-teamMembers-container mt-3">
@@ -165,15 +134,6 @@
 
                                     <div class="project-content-wrapper">
 
-
-                                        <div id="proje-ismi" class="project-name">
-
-
-                                            <h3 class="fw-bold">Proje İsmi</h3>
-                                            <p class="mt-3 fw-bold">{{unique.proje_ismi}}</p>
-
-                                        </div>
-
                                         <div id="proje-konusu" class="description">
 
                                             <h3 class="fw-bold">Proje Konusu</h3>
@@ -204,7 +164,9 @@
 
                                 </div>
 
-                                <div class="col text-center mt-4"><a class="back-btn btn" href="/proje_kutuphanesi#kutuphane"><i class="fa-solid fa-arrow-left fa-2xl"></i> Kütüphaneye Geri Dön</a></div>
+                                <div class="col text-center mt-4"><a class="back-btn btn"
+                                        href="/proje_kutuphanesi#kutuphane"><i
+                                            class="fa-solid fa-arrow-left fa-2xl"></i> Kütüphaneye Geri Dön</a></div>
 
 
                             </div>
@@ -228,7 +190,8 @@
 
 
 
-
+       <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="fa-solid fa-arrow-up"></i></a>
 
     </div>
 

@@ -1,11 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
-body {
-  font-family: "Montserrat", sans-serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
 
 .main-navbar {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .project-item-wrapper {
@@ -23,7 +19,7 @@ a:hover {
 
 .project-metadata {
   padding: 10px;
-  border-radius: 5px;
+  background-color: #1d1b1b;
 }
 
 .project-metadata ul,
@@ -37,8 +33,16 @@ a:hover {
 
 .project-metadata li {
   margin: 20px;
-  color: black;
+  color: white;
   font-weight: bold;
+}
+
+.project-metadata a {
+
+  color: black;
+
+
+
 }
 
 .project-data-nav li {
@@ -82,12 +86,100 @@ a:hover {
   font-weight: bold;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transition: .4s ease;
+  transition: 0.4s ease;
 }
 .back-btn:hover {
-
   background-color: #f43d38;
   color: white;
   transform: scale(1.1);
+}
 
+.project-content-wrapper img {
+  height: auto;
+  max-width: 100%;
+}
+
+
+.project-navigation {
+
+background-color: #f99a1d;
+
+
+}
+
+
+#proje-ismi {
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+}
+
+
+
+
+.project-name-wrapper {
+  background-color: #1d1b1b;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(249, 154, 29, 1);
+}
+
+@media only screen and (min-width: 320px) {
+  #proje-ismi {
+    font-size: 64px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #proje-ismi {
+    font-size: 72px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #proje-ismi {
+    font-size: 80px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  #proje-ismi {
+    font-size: 88px;
+  }
+}
+
+
+.scroll-top {
+  background: #f99a1d;
+  width: 3rem;
+  height: 3rem;
+  position: fixed;
+  border-radius: 50%;
+  border: none;
+  left: 32px !important;
+  bottom: 32px;
+  left: unset;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.scroll-top i {
+  font-size: 24px;
+  color: #ffffff;
+  line-height: 0;
+}
+
+.scroll-top:hover {
+  background: #f43d38;
+  color: #fff;
+}
+
+.scroll-top.active {
+  visibility: visible;
+  opacity: 1;
 }

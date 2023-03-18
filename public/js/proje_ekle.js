@@ -96,10 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     },
     theme: "snow",
-    placeholder: "Projeniz hakkında detaylı bilgi verebilirsiniz.",
+    placeholder: "Proje Kütüphanesine eklenecek olan projenizin içeriğini oluşturun. (Bu içerik, projenize özel olarak oluşturulmuş sayfaya, buradaki içerik ile aynı formatta eklenmektedir.) Proje kapak görselinin yanı sıra projeye ait başka görseller de ekleyebilir veya herhangi bir siteye link yönlendirmesi yapabilirsiniz.",
   });
 
-  // When the form is submitted, update the hidden textarea with the latest content
   document
     .querySelector("#project_form")
     .addEventListener("submit", function () {
