@@ -65,10 +65,6 @@ hbs.registerHelper("lookup", function (obj, key) {
 
 //-----------------------------HANDLEBARS CONFIG---------------------------------------------------//
 
-
-
-
-
 app.use("/", require("./routes/sayfalar"));
 app.use("/", require("./routes/auth"));
 

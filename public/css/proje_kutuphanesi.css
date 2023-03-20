@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 *,
 *:before,
 *:after {
@@ -19,6 +20,11 @@ body {
   text-rendering: optimizeLegibility;
   background-color: white; /*  #212121 for better readability black tone */
   scroll-behavior: smooth;
+}
+
+#toggle-filter {
+  position: absolute;
+  right: 0;
 }
 
 .card {
@@ -560,8 +566,8 @@ canvas {
 }
 
 #filters {
-  background-color: #ece6df;
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgb(249, 154, 29);
 }
 
 #filter-remover {

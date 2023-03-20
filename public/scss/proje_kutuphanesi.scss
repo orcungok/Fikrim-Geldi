@@ -37,6 +37,17 @@ body {
 // =======================================DARKMODE.JS CONFIG END==========================================================
 
 
+#toggle-filter {
+
+  position: absolute;
+  right: 0;
+
+
+}
+
+
+
+
 
 // =======================================PROJECT CARDS START==========================================================
 
@@ -642,8 +653,11 @@ $borderW: 2px;
 }
 
 #filters {
-  background-color: #ece6df;
+ 
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(249, 154, 29, 1);
+
+  
 }
 
 #filter-remover {
