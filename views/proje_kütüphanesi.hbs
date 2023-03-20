@@ -119,84 +119,89 @@
 
 
           <label class="fw-bold" for="filters">PROJE FİLTRESİ</label>
-          <div id="filters" class="row mb-5">
-            <div class="col-12 col-lg-4 me-auto">
+          <aside>
 
-              <div class="custom-select m-3">
-                <label class="form-label" for="project-category-filter">Kategoriye Göre</label>
-                <select class="w-100 form-select" name="project-category-filter" id="project-category-filter"
-                  onchange="location = this.value;">
-                  <option value="0" disabled selected>Bir Kategori Seçiniz</option>
-                  <option value="/proje_kutuphanesi#kutuphane">Tüm Projeler</option>
-                  <option value="/proje_kutuphanesi?proje_kategorisi=arge{{urlStringSpecial}}#kutuphane">Arge</option>
-                  <option
-                    value="/proje_kutuphanesi?proje_kategorisi=kurumsal sosyal sorumluluk{{urlStringSpecial}}#kutuphane">
-                    Kurumsal Sosyal
-                    Sorumluluk</option>
-                  <option value="/proje_kutuphanesi?proje_kategorisi=hizmet{{urlStringSpecial}}#kutuphane">Hizmet
-                  </option>
-                  <option value="/proje_kutuphanesi?proje_kategorisi=uretim{{urlStringSpecial}}#kutuphane">Üretim
-                  </option>
+            <div id="filters" class="row mb-5">
+              <div class="col-12 col-lg-4 me-auto">
 
-                </select>
-              </div>
+                <div class="custom-select m-3">
+                  <label class="form-label" for="project-category-filter">Kategoriye Göre</label>
+                  <select class="w-100 form-select" name="project-category-filter" id="project-category-filter"
+                    onchange="location = this.value;">
+                    <option value="0" disabled selected>Bir Kategori Seçiniz</option>
+                    <option value="/proje_kutuphanesi#kutuphane">Tüm Projeler</option>
+                    <option value="/proje_kutuphanesi?proje_kategorisi=arge{{urlStringSpecial}}#kutuphane">Arge</option>
+                    <option
+                      value="/proje_kutuphanesi?proje_kategorisi=kurumsal sosyal sorumluluk{{urlStringSpecial}}#kutuphane">
+                      Kurumsal Sosyal
+                      Sorumluluk</option>
+                    <option value="/proje_kutuphanesi?proje_kategorisi=hizmet{{urlStringSpecial}}#kutuphane">Hizmet
+                    </option>
+                    <option value="/proje_kutuphanesi?proje_kategorisi=uretim{{urlStringSpecial}}#kutuphane">Üretim
+                    </option>
 
+                  </select>
+                </div>
 
-            </div>
-
-            {{#ifCond sort '!==' 'render'}}
-
-
-            <div class="col-12 col-lg-4">
-
-
-              <div class="custom-select m-3">
-
-
-                <label class="form-label" for="metadata-filter">Özelliklerine Göre</label>
-                <select class="w-100 form-select" name="metadata-filter" id="metadata-filter"
-                  onchange="location = this.value;">
-                  <option value="0" selected disabled>Bir Sırala Yöntemi Seçiniz</option>
-                  <option value="/proje_kutuphanesi{{urlStringSortBy}}proje_goruntulenme_sayisi#kutuphane">En Çok
-                    Görüntülenenler
-                  </option>
-                  <option value="/proje_kutuphanesi{{urlStringSortBy}}proje_eklenme_tarihi#kutuphane">En Son
-                    Eklenilenler
-                  </option>
-
-                </select>
-              </div>
-
-            </div>
-
-
-            {{/ifCond}}
-
-
-
-            {{#ifCond rangeRemover '!==' 'removeRange'}}
-            <div class="col-12 col-lg-3">
-
-              <div class="custom-select m-3">
-
-                <label class="form-label" for="date-filter">Tarihe Göre</label>
-                <select class="w-100 form-select" name="date-filter" id="date-filter" onchange="location = this.value;">
-
-                  <option value="0" disabled selected>Bir Aralık Seçiniz</option>
-                  <option value="/proje_kutuphanesi{{urlStringRange}}bugun#kutuphane">Bugün</option>
-                  <option value="/proje_kutuphanesi{{urlStringRange}}bu_hafta#kutuphane">Bu Hafta</option>
-                  <option value="/proje_kutuphanesi{{urlStringRange}}bu_ay#kutuphane">Bu Ay</option>
-                  <option value="/proje_kutuphanesi{{urlStringRange}}bu_yil#kutuphane">Bu Yıl</option>
-
-                </select>
 
               </div>
 
+              {{#ifCond sort '!==' 'render'}}
+
+
+              <div class="col-12 col-lg-4">
+
+
+                <div class="custom-select m-3">
+
+
+                  <label class="form-label" for="metadata-filter">Özelliklerine Göre</label>
+                  <select class="w-100 form-select" name="metadata-filter" id="metadata-filter"
+                    onchange="location = this.value;">
+                    <option value="0" selected disabled>Bir Sırala Yöntemi Seçiniz</option>
+                    <option value="/proje_kutuphanesi{{urlStringSortBy}}proje_goruntulenme_sayisi#kutuphane">En Çok
+                      Görüntülenenler
+                    </option>
+                    <option value="/proje_kutuphanesi{{urlStringSortBy}}proje_eklenme_tarihi#kutuphane">En Son
+                      Eklenilenler
+                    </option>
+
+                  </select>
+                </div>
+
+              </div>
+
+
+              {{/ifCond}}
+
+
+
+              {{#ifCond rangeRemover '!==' 'removeRange'}}
+              <div class="col-12 col-lg-3">
+
+                <div class="custom-select m-3">
+
+                  <label class="form-label" for="date-filter">Tarihe Göre</label>
+                  <select class="w-100 form-select" name="date-filter" id="date-filter"
+                    onchange="location = this.value;">
+
+                    <option value="0" disabled selected>Bir Aralık Seçiniz</option>
+                    <option value="/proje_kutuphanesi{{urlStringRange}}bugun#kutuphane">Bugün</option>
+                    <option value="/proje_kutuphanesi{{urlStringRange}}bu_hafta#kutuphane">Bu Hafta</option>
+                    <option value="/proje_kutuphanesi{{urlStringRange}}bu_ay#kutuphane">Bu Ay</option>
+                    <option value="/proje_kutuphanesi{{urlStringRange}}bu_yil#kutuphane">Bu Yıl</option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+              {{/ifCond}}
+
             </div>
 
-            {{/ifCond}}
-
-          </div>
+          </aside>
 
 
 
@@ -282,11 +287,11 @@
 
                 <h2 align="center" id="tumProjeler">TÜM PROJELER</h2>
 
-                    {{#if msgNoProjects}}
-                      
-                    <p>{{msgNoProjects}}</p>
+                {{#if msgNoProjects}}
 
-                    {{/if}}
+                <p>{{msgNoProjects}}</p>
+
+                {{/if}}
 
 
               </div>
