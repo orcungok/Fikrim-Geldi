@@ -5,12 +5,11 @@ const DOMPurify = createDOMPurify(window);
 
 const db_fg = require("../data/db_fg");
 
-// const takim_arkadasi_ilanlari_db = require("../data/takim_arkadasi_ilanlari_db");
 
 exports.getAdminPanelData = async (req, res) => {
   try {
-    if (req.user && req.user.ROLE == "admin") {
-      const { ID: user_id } = req.user;
+    if (req.user && req.user.role == "admin") {
+      const { id: user_id } = req.user;
       let sqlMain = "SELECT * FROM proje_detaylari";
       const [rawProjeler] = await db_fg.query(sqlMain);
 
@@ -32,12 +31,9 @@ exports.getAdminPanelData = async (req, res) => {
         }
       );
 
-      // let sql2 = "SELECT * FROM ta_ilanlari";
-      // const allDB2 = await takim_arkadasi_ilanlari_db.query(sql2);
-      // const takim_arkadasi_ilanlari = allDB2[0];
+    
       res.render("dashboard", {
         projeler: sanitizedProjeler,
-        // ilanlar: takim_arkadasi_ilanlari,
         user_id,
       });
     } else {
@@ -57,9 +53,6 @@ exports.getAdminPanelData = async (req, res) => {
 
 exports.postFromAdminPanel = async (req, res) => {
   try {
-    // console.log(req.body);
-
-    if (Object.keys(req.body).includes("project_name")) {
       const {
         project_id,
         user_id,
@@ -84,7 +77,7 @@ exports.postFromAdminPanel = async (req, res) => {
 
       const project_image_path = `/images/project_images/${project_image}`;
 
-      const query = `INSERT INTO \`sql7605562\`.\`proje_detaylari_admin\` (\`user_id\`,\`email\`,\`projeyi_ekleyen\`,\`proje_ismi\`,\`proje_konusu\`,\`proje_kategorisi\`,\`proje_sponsoru\`,\`proje_takim_uyeleri\`, \`proje_takim_uyeleri_gorevleri\`,  \`proje_aciklamasi\`,\`proje_resmi_isim\`,\`proje_resmi_path\`, \`proje_dosyalari_url\`,\`proje_eklenme_tarihi\`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      const query = `INSERT INTO \`projeler\`.\`proje_detaylari_admin\` (\`user_id\`,\`email\`,\`projeyi_ekleyen\`,\`proje_ismi\`,\`proje_konusu\`,\`proje_kategorisi\`,\`proje_sponsoru\`,\`proje_takim_uyeleri\`, \`proje_takim_uyeleri_gorevleri\`,  \`proje_aciklamasi\`,\`proje_resmi_isim\`,\`proje_resmi_path\`, \`proje_dosyalari_url\`,\`proje_eklenme_tarihi\`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
       const values = [
         user_id,
         project_owner_email,
@@ -105,20 +98,6 @@ exports.postFromAdminPanel = async (req, res) => {
 
       const deleteSql = `DELETE FROM proje_detaylari WHERE id= ?`;
       await db_fg.query(deleteSql, [project_id]);
-      // const result = await db_fg.query(deleteSql, [projectId]);
-      // } else if (Object.keys(req.body).includes("annT_project_name")) {
-      //   let form = req.body;
-      //   //console.log(form);
-
-      //   // let queryTaİlan =
-      //   //   "INSERT INTO `takim_arkadasi_bul`.`ta_ilanlari_admin` (`user_id`,`email`,`ilani_ekleyen`,`ilan_basligi`,`ilan_aciklamasi`, `ilan_tarihi`, `ilan_projesi`,`ilan_sirketi`)" +
-      //   //   `VALUES ('${form.user_id}','${form.annT_owner_email}','${form.annT_owner_name}','${form.annT_title}','${form.annT_explanation}','${form.annT_date}','${form.annT_project_name}','${form.annT_company_name}');`;
-      //   // let ta_ilan = await takim_arkadasi_ilanlari_db.query(queryTaİlan);
-
-      //   // let deleteSql = `DELETE FROM ta_ilanlari WHERE id= '${form.annT_id}'`;
-      //   let result = await takim_arkadasi_ilanlari_db.query(deleteSql);
-    }
-
     res.redirect("/anasayfa/admin");
   } catch (err) {
     console.log(err);

@@ -10,18 +10,18 @@ const { token } = require("morgan");
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await db_fg.query(`select * from users where email = ?`, [
+    const user = await db_fg.query(`select * from kullanicilar where email = ?`, [
       email,
     ]);
 
-    if (!user[0].length || !(await bcrypt.compare(password, user[0][0].PASS))) {
+    if (!user[0].length || !(await bcrypt.compare(password, user[0][0].pass))) {
       return res.status(401).render("giriş_yap", {
         msg: "Emailiniz veya Şifreniz hatalı",
         msg_type: "error",
       });
     }
 
-    const id = user[0][0].ID;
+    const id = user[0][0].id;
     const token = jwt.sign({ id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
@@ -52,7 +52,7 @@ exports.register = async (req, res) => {
 
 
     const [user] = await db_fg.query(
-      "select email from users where email=?",
+      "select email from kullanicilar where email=?",
       [email]
     );
 
@@ -70,9 +70,8 @@ exports.register = async (req, res) => {
 
 
 
-    const isEmailValid = validator.isEmail(email,{errorLevel: true}); //=> true
+    const isEmailValid = validator.validate(email,{errorLevel: true}); //=> true
     // console.log(isEmailValid) ;
-      
 
     if (isEmailValid>0)
       return res.render("kayıt_ol", {
@@ -83,7 +82,7 @@ exports.register = async (req, res) => {
     const r_token = randToken.generate(20);
     const hashedPassword = await bcrypt.hash(password, 8);
 
-    const registerUser = await db_fg.query("insert into users set ?", {
+     await db_fg.query("insert into kullanicilar set ?", {
       name,
       surname,
       email,
@@ -127,6 +126,8 @@ exports.register = async (req, res) => {
 };
 
 exports.isLoggedIn = async (req, res, next) => {
+
+
   if (req.cookies.joes) {
     try {
       const decode = await promisify(jwt.verify)(
@@ -134,20 +135,23 @@ exports.isLoggedIn = async (req, res, next) => {
         process.env.JWT_SECRET
       );
 
-      const user = await db_fg.query(`select * from users where id = ?`, [
+      const user = await db_fg.query(`select * from kullanicilar where id = ?`, [
         [decode.id],
       ]);
+
 
       if (!user[0]) {
         return next();
       }
       req.user = user[0][0];
+      // console.log(req.user) ;
       return next();
     } catch (error) {
       console.log(error);
       return next();
     }
   } else {
+    console.log("There is an error.")
     next();
   }
 };

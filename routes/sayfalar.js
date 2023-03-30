@@ -20,9 +20,12 @@ router.get("/kayit_ol", (req, res) => {
 router.get("/anasayfa", userController.isLoggedIn, (req, res) => {
   try {
     if (req.user) {
-      const role = req.user.ROLE;
-      const email = req.user.EMAIL;
-      const user_id = req.user.ID;
+      
+      console.log(req.user) ; 
+
+      const role = req.user.role;
+      const email = req.user.email;
+      const user_id = req.user.id;
       res.render("anasayfa", { user: req.user, role, email, user_id });
     } else {
       res.redirect("/giris_yap");

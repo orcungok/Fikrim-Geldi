@@ -5,12 +5,14 @@ const { JSDOM } = require("jsdom");
 exports.getAdminApprovedProjects = async (req, res) => {
   try {
     if (req.user) {
+      console.log(req.user);
+
       const sqlMain = "SELECT * FROM proje_detaylari_admin";
       const [allDB] = await db_fg.query(sqlMain);
       const projeler = allDB || []; // veritabanındaki projeleri ata veya boş dizi olarak ata
       const length = projeler.length;
-      const email = req.user.EMAIL;
-      let user_id = req?.user?.ID; // Check if the req object has a 'user' property and if it does, get its 'ID' property
+      const email = req.user.email;
+      let user_id = req?.user?.id; // Check if the req object has a 'user' property and if it does, get its 'ID' property
       if (!user_id) throw new Error("Kullanıcı ID'si bulunamadı");
       if (projeler.length > 0) {
         //veritabanında proje mevcutsa
@@ -168,7 +170,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
         //filtreleme bitiş--------------------------------------------
       } else {
         //kütüphanede proje mevcut değilse sadece kullanıcı bilgilerini gönder.
-        const { ID: user_id, EMAIL: email } = req.user;
+        const { id: user_id, email: email } = req.user;
         return res.render("proje_kütüphanesi", {
           email,
           user_id,
@@ -210,7 +212,7 @@ exports.projects_search = async (req, res) => {
 exports.getProjectBlog = async (req, res) => {
   try {
     if (req.user) {
-      const { EMAIL: user_email, ID: user_id } = req.user;
+      const { email: user_email, id: user_id } = req.user;
       const proje_id = req.params.proje_id;
 
       const result = await db_fg.query(
@@ -245,12 +247,8 @@ exports.getProjectBlog = async (req, res) => {
             ...proje,
             proje_aciklamasi: renderedContent,
             proje_eklenme_tarihi: formattedDate,
-            proje_takim_uyeleri: JSON.parse(
-              JSON.parse(proje.proje_takim_uyeleri)
-            ),
-            proje_takim_uyeleri_gorevleri: JSON.parse(
-              JSON.parse(proje.proje_takim_uyeleri_gorevleri)
-            ),
+            proje_takim_uyeleri: proje.proje_takim_uyeleri,
+            proje_takim_uyeleri_gorevleri: proje.proje_takim_uyeleri_gorevleri,
           };
         });
 
@@ -284,10 +282,10 @@ exports.add_projects_ap = async (req, res) => {
   try {
     if (req.user) {
       const {
-        EMAIL: email,
-        ID: user_id,
-        NAME: name,
-        SURNAME: surname,
+        email: email,
+        id: user_id,
+        name: name,
+        surname: surname,
       } = req.user;
 
       const form = req.body;
@@ -309,7 +307,7 @@ exports.add_projects_ap = async (req, res) => {
         .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
       const dbQuery =
-        "INSERT INTO `sql7605562`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`, `proje_resmi_isim`,`proje_resmi_path`, `proje_dosyalari_url`,`proje_eklenme_tarihi`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        "INSERT INTO `projeler`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`, `proje_resmi_isim`,`proje_resmi_path`, `proje_dosyalari_url`,`proje_eklenme_tarihi`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       const queryParams = [
         user_id,
         email,
