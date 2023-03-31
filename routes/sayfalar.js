@@ -5,7 +5,6 @@ const router = express.Router();
 const userController = require("../controllers/kullanıcılar");
 const projectController = require("../controllers/projeler");
 const profileController = require("../controllers/profil_controller");
-// const teamMateAnnController = require("../controllers/takim_arkadasi_ilanlari");
 const adminPanelController = require("../controllers/admin_panel");
 const fileUploadController = require("../controllers/fileUpload") ;
 
@@ -111,42 +110,5 @@ router.post("/sifremi_guncelle", userController.update_password, (req, res) => {
   res.render("şifremi_güncelle");
 });
 
-// router.get(
-//   "/ilanlari_ara",
-//   userController.isLoggedIn,
-//   teamMateAnnController.taAnn_search,
-//   (req, res) => {}
-// );
-
-// router.get(
-//   "/takim_arkadasi_ilan_panosu",
-//   userController.isLoggedIn,
-//   teamMateAnnController.getAdminApprovedAnns,
-//   (req, res) => {
-
-//   }
-// );
-
-// router.get(
-//   "/takim_arkadasi_ilan_panosu/:sirket",
-//   userController.isLoggedIn,
-//   teamMateAnnController.getFilteredAnns,
-//   (req, res) => {}
-// );
-
-// router.get(
-//   "/takim-arkadasi-ilani-ver",
-//   userController.isLoggedIn,
-//   (req, res) => {
-//     res.render("ta_ilan_ver", { user_id: req.user.ID });
-//   }
-// );
-
-// router.post(
-//   "/takim-arkadasi-ilani-ver",
-//   userController.isLoggedIn,
-//   teamMateAnnController.postAnnToAdminPage,
-//   (req, res) => {}
-// );
 
 module.exports = router;
