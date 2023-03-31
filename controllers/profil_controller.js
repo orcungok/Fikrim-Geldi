@@ -1,6 +1,9 @@
 const db_fg = require("../data/db_fg");
 const { promisify } = require("util");
-// const takim_arkadasi_ilanlari_db = require("../data/takim_arkadasi_ilanlari_db");
+
+
+//Bu controller kullanıcının kişisel bilgilerinin ve sisteme eklemiş olduğu projelerin görüntülenmesini sağlar. 
+
 
 exports.getPersonalData = async (req, res) => {
   try {
@@ -8,30 +11,23 @@ exports.getPersonalData = async (req, res) => {
       let user_id = req.params.user_id;
       let email = req.user.EMAIL;
 
-      const user = await db_fg.query(`select * from users where id=?`, [
+      const user = await db_fg.query(`select * from kullanicilar where id=?`, [
         user_id,
-      ]); //user uzun saçma dizi, user[0] içinde tek bir obje bulunduran dizi
+      ]);
 
       const allDb = await db_fg.query(
         `select * from proje_detaylari_admin where user_id='${user_id}'`
       );
       const unique_projeler = allDb[0];
-      let  upLength = unique_projeler.length ; 
-
-      // const allDb_TA = await takim_arkadasi_ilanlari_db.query(
-      //   `select * from ta_ilanlari_admin where user_id='${user_id}'`
-      // );
-      // const unique_ilanlar = allDb_TA[0];
+      let upLength = unique_projeler.length;
 
       res.render("profil", {
         unique_projeler: unique_projeler,
-        // unique_ilanlar: unique_ilanlar,
         unique_user: user[0],
         user_id,
         email,
-        upLength
+        upLength,
       });
-      
     } else {
       res.status(401).redirect("/");
     }

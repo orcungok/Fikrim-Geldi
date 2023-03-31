@@ -7,6 +7,10 @@ const validator = require("isemail") ;
 const randToken = require("rand-token");
 const { token } = require("morgan");
 
+
+//Bu controller bir kullanıcyı sisteme kayıt etmeye, sisteme girişin sağlanmasına , kullanıcının sisteme girmiş olduğunun doğrulanmasına, sistemden çıkış yapmasına ve şifrenin unutulması halinde şifrenin güncellenmesine olanak sağlar.
+
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -144,7 +148,6 @@ exports.isLoggedIn = async (req, res, next) => {
         return next();
       }
       req.user = user[0][0];
-      // console.log(req.user) ;
       return next();
     } catch (error) {
       console.log(error);

@@ -1,3 +1,6 @@
+//.env dosyasına yazdığımız bilgier ile bir config objesi oluşturuyoruz. bu objeyi database'e bağlanırken kullanınız.
+
+
 const config = {
   db_fg: {
     host: process.env.DATABASE_HOST,

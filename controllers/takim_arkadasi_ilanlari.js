@@ -1,3 +1,12 @@
+
+
+//TAKIM ARKADAŞI BULMA VE DANIŞMANLIK ALMA MODÜLLERİ İPTAL EDİLMİŞTİR. BU KAYNAK KODLARI GÜNCELLEYECEK OLDUĞUNUZ TAKDİRDE BU DOSYAYI SİLEBİLİRSİNİZ
+
+
+
+
+
+
 // const takim_arkadasi_ilanlari_db = require("../data/takim_arkadasi_ilanlari_db");
 // const projeler_db = require("../data/projeler_db");
 

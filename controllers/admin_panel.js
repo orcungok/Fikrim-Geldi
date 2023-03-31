@@ -6,6 +6,11 @@ const DOMPurify = createDOMPurify(window);
 const db_fg = require("../data/db_fg");
 
 
+
+//Bu controller, siteye proje eklenmesinin ardından projeyi admin panelinde görebilmenize ve bunu platformda yayınlayabilmenize olanak sağlar.
+
+
+
 exports.getAdminPanelData = async (req, res) => {
   try {
     if (req.user && req.user.role == "admin") {

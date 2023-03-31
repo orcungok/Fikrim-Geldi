@@ -1,6 +1,9 @@
 const db_fg = require("../data/db_fg");
 const { JSDOM } = require("jsdom");
-// const iconv = require("iconv-lite");
+
+
+//Bu controller, programın bel kemiğidir. Projeler ile alakalı tüm işlemleri (görüntüleme, arama ve projeleri ekleme...) yapabilmeye olanak sağlar
+
 
 exports.getAdminApprovedProjects = async (req, res) => {
   try {
@@ -12,7 +15,7 @@ exports.getAdminApprovedProjects = async (req, res) => {
       const projeler = allDB || []; // veritabanındaki projeleri ata veya boş dizi olarak ata
       const length = projeler.length;
       const email = req.user.email;
-      let user_id = req?.user?.id; // Check if the req object has a 'user' property and if it does, get its 'ID' property
+      let user_id = req?.user?.id; 
       if (!user_id) throw new Error("Kullanıcı ID'si bulunamadı");
       if (projeler.length > 0) {
         //veritabanında proje mevcutsa
@@ -289,7 +292,7 @@ exports.add_projects_ap = async (req, res) => {
       } = req.user;
 
       const form = req.body;
-      console.log(form);
+      // console.log(form);
 
       const fullName = `${name} ${surname}`;
 
@@ -307,7 +310,7 @@ exports.add_projects_ap = async (req, res) => {
         .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
       const dbQuery =
-        "INSERT INTO `projeler`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`, `proje_resmi_isim`,`proje_resmi_path`, `proje_dosyalari_url`,`proje_eklenme_tarihi`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        "INSERT INTO `projeler`.`proje_detaylari` (`user_id`,`email`,`projeyi_ekleyen`,`proje_ismi`,`proje_konusu`,`proje_kategorisi`,`proje_sponsoru`,`proje_lideri`,`proje_takim_uyeleri`, `proje_takim_uyeleri_gorevleri`,  `proje_aciklamasi`, `proje_resmi_isim`,`proje_resmi_path`, `proje_dosyalari_url`,`proje_eklenme_tarihi`) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       const queryParams = [
         user_id,
         email,
@@ -316,6 +319,7 @@ exports.add_projects_ap = async (req, res) => {
         form.project_subject,
         form.project_category,
         form.project_sponsor,
+        form.project_leader,
         JSON.stringify(form.project_team_members),
         JSON.stringify(form.project_team_members_duty),
         form.project_explanation,

@@ -126,25 +126,25 @@ background-color: #f99a1d;
 
 @media only screen and (min-width: 320px) {
   #proje-ismi {
-    font-size: 64px;
+    font-size: 40px;
   }
 }
 
 @media only screen and (min-width: 768px) {
   #proje-ismi {
-    font-size: 72px;
+    font-size: 48px;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   #proje-ismi {
-    font-size: 80px;
+    font-size: 58px;
   }
 }
 
 @media only screen and (min-width: 1600px) {
   #proje-ismi {
-    font-size: 88px;
+    font-size: 64px;
   }
 }
 
